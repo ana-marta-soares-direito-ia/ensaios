@@ -1,0 +1,19 @@
+name: Confirmação das máquinas de ensaio
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/confirmacao.yml']
+permissions:
+  contents: read
+jobs:
+  maquina:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - shell: bash
+        run: node -e "console.log('Máquina a funcionar:', process.platform, process.arch, process.version)"
