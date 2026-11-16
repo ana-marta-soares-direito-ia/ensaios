@@ -1,0 +1,251 @@
+{
+ "sistema": "win32",
+ "certos": 61,
+ "falhados": 0,
+ "ensaios": [
+  {
+   "ensaio": "código de licença inválido é recusado",
+   "passou": true
+  },
+  {
+   "ensaio": "pedido com outro nome de anfitrião é recusado",
+   "passou": true
+  },
+  {
+   "ensaio": "pedido de escrita vindo de uma página da Internet é recusado",
+   "passou": true
+  },
+  {
+   "ensaio": "não serve ficheiros fora do painel",
+   "passou": true
+  },
+  {
+   "ensaio": "estado do programa",
+   "passou": true
+  },
+  {
+   "ensaio": "extensão que lê tudo e os cookies com nome de IA: risco alto",
+   "passou": true
+  },
+  {
+   "ensaio": "extensão que só lê os sítios de IA: atenção, com o nome traduzido",
+   "passou": true
+  },
+  {
+   "ensaio": "extensão sem acesso: sem risco",
+   "passou": true
+  },
+  {
+   "ensaio": "extensão desligada aparece como desligada",
+   "passou": true
+  },
+  {
+   "ensaio": "extensão conhecida não é dada como risco alto",
+   "passou": true
+  },
+  {
+   "ensaio": "acesso a todos os ficheiros do utilizador: risco alto",
+   "passou": true
+  },
+  {
+   "ensaio": "acesso a uma só pasta, com versão fixa: sem risco",
+   "passou": true
+  },
+  {
+   "ensaio": "segredo em texto simples é assinalado sem ser mostrado",
+   "passou": true
+  },
+  {
+   "ensaio": "assistente com acesso a comandos: risco alto",
+   "passou": true
+  },
+  {
+   "ensaio": "modo sem confirmações do Claude Code é assinalado",
+   "passou": true
+  },
+  {
+   "ensaio": "as protecções do sistema são lidas",
+   "passou": true
+  },
+  {
+   "ensaio": "a leitura das aplicações instaladas corre sem erro",
+   "passou": true
+  },
+  {
+   "ensaio": "aplicação com o nome ChatGPT sem assinatura: perigo",
+   "passou": true
+  },
+  {
+   "ensaio": "ChatGPT assinado pela OpenAI: confirmada",
+   "passou": true
+  },
+  {
+   "ensaio": "Claude assinado por outra entidade: outro editor",
+   "passou": true
+  },
+  {
+   "ensaio": "DeepSeek para computador: a confirmar",
+   "passou": true
+  },
+  {
+   "ensaio": "cortar o acesso retira-o do ficheiro e mantém o resto",
+   "passou": true
+  },
+  {
+   "ensaio": "fica uma cópia do ficheiro original",
+   "passou": true
+  },
+  {
+   "ensaio": "não aceita cortar em ficheiros que não sejam de assistentes",
+   "passou": true
+  },
+  {
+   "ensaio": "repor devolve o acesso ao ficheiro",
+   "passou": true
+  },
+  {
+   "ensaio": "o ficheiro mantém a indentação original",
+   "passou": true
+  },
+  {
+   "ensaio": "documento limpo.pdf: nenhuma",
+   "passou": true
+  },
+  {
+   "ensaio": "documento faixa-escura.pdf: nenhuma",
+   "passou": true
+  },
+  {
+   "ensaio": "documento branco.pdf: alta",
+   "passou": true
+  },
+  {
+   "ensaio": "documento invisivel.pdf: alta",
+   "passou": true
+  },
+  {
+   "ensaio": "documento minusculo.pdf: alta",
+   "passou": true
+  },
+  {
+   "ensaio": "documento fora.pdf: alta",
+   "passou": true
+  },
+  {
+   "ensaio": "documento cinza-claro.pdf: alta",
+   "passou": true
+  },
+  {
+   "ensaio": "ficheiro de tipo não lido é dito como tal",
+   "passou": true
+  },
+  {
+   "ensaio": "ficheiro corrompido não derruba o programa",
+   "passou": true
+  },
+  {
+   "ensaio": "ficheiro descarregado com instruções escondidas é assinalado; o ficheiro limpo não",
+   "passou": true
+  },
+  {
+   "ensaio": "texto normal copiado fica como está",
+   "passou": true
+  },
+  {
+   "ensaio": "comando inofensivo copiado fica como está",
+   "passou": true
+  },
+  {
+   "ensaio": "comando perigoso copiado é retirado antes de poder ser colado",
+   "passou": true
+  },
+  {
+   "ensaio": "a retirada fica registada, com o comando",
+   "passou": true
+  },
+  {
+   "ensaio": "o utilizador pode repor o comando, e não volta a ser retirado",
+   "passou": true
+  },
+  {
+   "ensaio": "outro comando perigoso volta a ser retirado",
+   "passou": true
+  },
+  {
+   "ensaio": "com a guarda desligada, nada é retirado",
+   "passou": true
+  },
+  {
+   "ensaio": "o painel abre e conta os pontos a resolver",
+   "passou": true
+  },
+  {
+   "ensaio": "sem a extensão, o painel diz como a instalar",
+   "passou": true
+  },
+  {
+   "ensaio": "painel: extensões lidas do disco, por navegador e perfil",
+   "passou": true
+  },
+  {
+   "ensaio": "painel: acessos dos assistentes",
+   "passou": true
+  },
+  {
+   "ensaio": "painel: «Cortar este acesso» altera o ficheiro",
+   "passou": true
+  },
+  {
+   "ensaio": "painel: «Repor este acesso» devolve-o",
+   "passou": true
+  },
+  {
+   "ensaio": "painel: documento com instruções escondidas",
+   "passou": true
+  },
+  {
+   "ensaio": "painel: a cópia limpa não leva as instruções",
+   "passou": true
+  },
+  {
+   "ensaio": "painel: documento limpo",
+   "passou": true
+  },
+  {
+   "ensaio": "painel: endereço falso",
+   "passou": true
+  },
+  {
+   "ensaio": "painel: endereço oficial",
+   "passou": true
+  },
+  {
+   "ensaio": "painel: comando perigoso",
+   "passou": true
+  },
+  {
+   "ensaio": "painel: guardas e protecções",
+   "passou": true
+  },
+  {
+   "ensaio": "painel: aplicações de IA",
+   "passou": true
+  },
+  {
+   "ensaio": "painel: registo das ocorrências",
+   "passou": true
+  },
+  {
+   "ensaio": "relatório em Word: abre e traz as secções e os dados",
+   "passou": true
+  },
+  {
+   "ensaio": "painel em ecrã de telemóvel: sem deslocação horizontal",
+   "passou": true
+  },
+  {
+   "ensaio": "painel sem erros no navegador",
+   "passou": true
+  }
+ ]
+}
