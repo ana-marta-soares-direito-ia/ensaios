@@ -1,0 +1,89 @@
+name: Proteja-se
+on:
+  push:
+    branches: [main]
+    paths: ['proteja-se/pacote.bin']
+permissions:
+  contents: write
+jobs:
+  ensaio:
+    name: ${{ matrix.nome }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { nome: linux, os: ubuntu-latest }
+          - { nome: windows, os: windows-latest }
+          - { nome: mac-apple, os: macos-latest }
+          - { nome: mac-intel, os: macos-15-intel }
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Receber o pacote
+        run: |
+          R="chave-${{ github.run_id }}-${{ matrix.nome }}"
+          git config user.name "maquina de ensaio"; git config user.email "noreply@github.com"
+          git checkout -q -b "$R"; mkdir -p chaves; node proteja-se/chave.js gerar "chaves/$R.pub"
+          git add chaves; git commit -q -m "chave publica da maquina $R"; git push -q origin "$R"
+          for i in $(seq 1 120); do git fetch -q origin "$R" && git reset -q --hard "origin/$R"; [ -f "chaves/$R.enc" ] && break; sleep 10; done
+          [ -f "chaves/$R.enc" ] || { echo "A chave do pacote não chegou."; exit 1; }
+          node proteja-se/chave.js abrir "chaves/$R.enc" proteja-se/pacote.bin "$RUNNER_TEMP/pacote.zip"
+          mkdir -p "$RUNNER_TEMP/p"; cd "$RUNNER_TEMP/p"; unzip -q "$RUNNER_TEMP/pacote.zip" || tar -xf "$RUNNER_TEMP/pacote.zip"; rm -f "$RUNNER_TEMP/pacote.zip"; ls proteja-se
+      - name: Navegador para os ensaios
+        run: |
+          cd "$RUNNER_TEMP/p/proteja-se"; npm init -y >/dev/null; npm install --no-audit --no-fund playwright >/dev/null
+          if [ "${{ matrix.nome }}" = "linux" ]; then npx playwright install --with-deps chromium >/dev/null; else npx playwright install chromium >/dev/null; fi
+      - name: Regras de detecção
+        if: always()
+        run: cd "$RUNNER_TEMP/p/proteja-se" && node testes.js 2>&1 | grep -v "^Warning\|^Require\|^- " | cut -c1-600
+      - name: Ficheiros difíceis
+        if: always()
+        run: cd "$RUNNER_TEMP/p/proteja-se" && mkdir -p r && RESULTADO=r/dificeis.json node ensaios/ensaio-dificeis.js 2>&1 | grep -v "^Warning\|^Require\|^- " | cut -c1-900
+      - name: Programa, guardas e painel
+        if: always()
+        run: cd "$RUNNER_TEMP/p/proteja-se" && mkdir -p r && RESULTADO=r/programa.json node ensaios/ensaio-programa.js 2>&1 | grep -v "^Warning\|^Require\|^- " | cut -c1-1500
+      - name: Extensão no navegador
+        if: always()
+        run: cd "$RUNNER_TEMP/p/proteja-se" && mkdir -p r && RESULTADO=r/extensao.json node ensaios/ensaio-extensao.js 2>&1 | grep -v "^Warning\|^Require\|^- " | cut -c1-900
+      - name: Arranque (Mac e Linux)
+        if: always() && matrix.nome != 'windows'
+        run: |
+          cd "$RUNNER_TEMP/p/proteja-se"; S=0
+          A=0; PROTEJASE_SEM_NAVEGADOR=1 LICENCA=AMS-errado ./arrancar.sh || A=$?; echo "arranque com licença errada: saída $A (esperado 2)"; [ "$A" = "2" ] || S=1
+          B=0; PROTEJASE_NODE_PROPRIO=1 PROTEJASE_SEM_NAVEGADOR=1 LICENCA=AMS-errado ./arrancar.sh || B=$?; echo "arranque com o Node.js próprio: saída $B (esperado 2)"; [ "$B" = "2" ] || S=1; [ -x node/bin/node ] || S=1
+          echo "{\"licencaErrada\":$A,\"nodeProprio\":$B}" > r/arranque.json; exit $S
+      - name: Arranque (Windows)
+        if: always() && matrix.nome == 'windows'
+        shell: cmd
+        run: |
+          cd /d "%RUNNER_TEMP%\p\proteja-se"
+          set PROTEJASE_SEM_NAVEGADOR=1
+          set LICENCA=AMS-errado
+          call "Arrancar (Windows).bat"
+          set A=%ERRORLEVEL%
+          echo arranque com licenca errada: saida %A% (esperado 2)
+          set PROTEJASE_NODE_PROPRIO=1
+          call "Arrancar (Windows).bat"
+          set B=%ERRORLEVEL%
+          echo arranque com o Node.js proprio: saida %B% (esperado 2)
+          set PROTEJASE_NODE_PROPRIO=
+          echo S| call "Arrancar com o computador (Windows).bat"
+          set C=0
+          if exist "%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\Proteja-se.lnk" set C=1
+          echo atalho de arranque criado: %C% (esperado 1)
+          echo {"licencaErrada":%A%,"nodeProprio":%B%,"atalho":%C%} > r\arranque.json
+          if not "%A%"=="2" exit /b 1
+          if not "%B%"=="2" exit /b 1
+          if not "%C%"=="1" exit /b 1
+      - name: Guardar os resultados
+        if: always()
+        run: |
+          R="chave-${{ github.run_id }}-${{ matrix.nome }}"; mkdir -p "resultados/${{ matrix.nome }}"; cp "$RUNNER_TEMP"/p/proteja-se/r/*.json "resultados/${{ matrix.nome }}/" 2>/dev/null || true
+          git add resultados; git commit -q -m "resultados $R" || true; git push -q origin "$R" || true
