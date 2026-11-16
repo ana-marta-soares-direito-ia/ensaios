@@ -1,0 +1,384 @@
+{
+ "certos": 63,
+ "falhados": 0,
+ "ensaios": [
+  {
+   "ficheiro": "cr-botao.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "cr-branco.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "cr-escondido-na-pagina.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "cr-escuro.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "cr-gradiente.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "cr-imagem.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "cr-limpo.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "cr-mesma-cor.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "cr-minusculo.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "cr-quase-branco.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "cr-tabela.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "cr-tapado.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "cr-transparente.pdf",
+   "esperado": "alta|ausente",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "h-alt.html",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "h-branco.html",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "h-comentario.html",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "h-escondido.html",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "h-etiquetas.html",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "h-fora.html",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "h-limpo.html",
+   "esperado": "nenhuma|media",
+   "obtido": "media",
+   "passou": true
+  },
+  {
+   "ficheiro": "lo-w-branco-a-meio.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "lo-w-branco.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "lo-w-cabecalho-de-tabela-escuro.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "lo-w-letra-pequena.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "lo-w-limpo.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "lo-w-mesma-cor-na-celula.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "lo-w-realce-preto.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "lo-w-rodape-branco.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "lo-w-um-ponto.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-branco-sem-ordens.pdf",
+   "esperado": "media",
+   "obtido": "media",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-branco-sobre-imagem.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-branco.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-digitalizacao-ocr.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-digitalizacao-texto-por-baixo.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-faixa-escura.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-fora.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-invisivel.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-letra-pequena.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-limpo.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-marca-de-agua.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-mesma-cor.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-minusculo.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-ordem-a-vista.pdf",
+   "esperado": "media",
+   "obtido": "media",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-propriedades.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-quase-preto.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-realce.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-tapado-forma.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-tapado-imagem.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-terceira-pagina.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-transparente.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "w-branco-a-meio.docx",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "w-branco.docx",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "w-cabecalho-de-tabela-escuro.docx",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "w-letra-pequena.docx",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "w-limpo.docx",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "w-mesma-cor-na-celula.docx",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "w-oculto.docx",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "w-ordem-a-vista.docx",
+   "esperado": "media",
+   "obtido": "media",
+   "passou": true
+  },
+  {
+   "ficheiro": "w-propriedades.docx",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "w-realce-preto.docx",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "w-rodape-branco.docx",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "w-tabela-com-estilo.docx",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "w-um-ponto.docx",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  }
+ ]
+}
