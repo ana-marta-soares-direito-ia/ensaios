@@ -1,0 +1,28 @@
+name: Fale e Peça (ensaio dos modelos)
+on:
+  push:
+    paths: ['fale-e-peca/ensaio/**']
+  workflow_dispatch:
+jobs:
+  ensaio:
+    strategy:
+      fail-fast: false
+      matrix:
+        parte: [voz, gemma, outros]
+    runs-on: ubuntu-latest
+    timeout-minutes: 170
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Instalar
+        run: |
+          python -m pip install -q -U pip huggingface_hub
+          if [ "${{ matrix.parte }}" = "voz" ]; then pip install -q faster-whisper jiwer piper-tts; fi
+          if [ "${{ matrix.parte }}" = "gemma" ]; then pip install -q -U litert-lm; litert-lm --help | head -30 || true; litert-lm run --help | head -60 || true; fi
+          if [ "${{ matrix.parte }}" = "outros" ]; then pip install -q llama-cpp-python --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cpu; fi
+      - name: Ensaio
+        run: SAIDA="$RUNNER_TEMP/saida" python fale-e-peca/ensaio/correr.py ${{ matrix.parte }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: 'fale-e-peca-${{ matrix.parte }}', path: '${{ runner.temp }}/saida/resultado.json' }
