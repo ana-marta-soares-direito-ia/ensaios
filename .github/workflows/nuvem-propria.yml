@@ -1,0 +1,149 @@
+name: Nuvem Própria
+on:
+  push:
+    branches: [main]
+    paths: ['nuvem-propria/pacote.bin']
+permissions:
+  contents: write
+jobs:
+  android:
+    name: android
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - name: Receber o pacote
+        env:
+          GUARDAR_CHAVE: 1
+        run: |
+          R="chave-${{ github.run_id }}-android"
+          git config user.name "maquina de ensaio"; git config user.email "noreply@github.com"
+          git checkout -q -b "$R"; mkdir -p chaves; node nuvem-propria/chave.js gerar "chaves/$R.pub"
+          git add chaves; git commit -q -m "chave publica da maquina $R"; git push -q origin "$R"
+          for i in $(seq 1 120); do git fetch -q origin "$R" && git reset -q --hard "origin/$R"; [ -f "chaves/$R.enc" ] && break; sleep 10; done
+          [ -f "chaves/$R.enc" ] || { echo "A chave do pacote não chegou."; exit 1; }
+          node nuvem-propria/chave.js abrir "chaves/$R.enc" nuvem-propria/pacote.bin "$RUNNER_TEMP/pacote.zip"
+          mkdir -p "$RUNNER_TEMP/p" "$RUNNER_TEMP/r"; cd "$RUNNER_TEMP/p"; unzip -q "$RUNNER_TEMP/pacote.zip"; rm -f "$RUNNER_TEMP/pacote.zip"
+          python3 ci/extrair.py produto.zip "$RUNNER_TEMP/x"; mv "$RUNNER_TEMP/x/Nuvem Própria" "$RUNNER_TEMP/np"; ls "$RUNNER_TEMP/np"
+      - name: Montar a aplicação Android
+        run: |
+          cd "$RUNNER_TEMP/p/android" && ./construir-apk.sh "$RUNNER_TEMP/nuvem-propria.apk"
+          cd "$GITHUB_WORKSPACE"; mkdir -p resultados/android; node nuvem-propria/chave.js fechar "$RUNNER_TEMP/nuvem-propria.apk" resultados/android/nuvem-propria.apk.bin
+          git add resultados; git commit -q -m "aplicacao montada (cifrada)"; git push -q origin "chave-${{ github.run_id }}-android"
+      - name: Permitir a virtualização
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules >/dev/null
+          sudo udevadm control --reload-rules; sudo udevadm trigger --name-match=kvm
+      - name: Ensaio no telemóvel simulado
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          target: google_apis
+          arch: x86_64
+          profile: pixel_6
+          disable-animations: true
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim
+          script: node "$RUNNER_TEMP/p/ci/ensaio-android.js" "$RUNNER_TEMP/np/programa" "$RUNNER_TEMP/nuvem-propria.apk" "$RUNNER_TEMP/r"
+      - name: Guardar os resultados
+        if: always()
+        run: |
+          R="chave-${{ github.run_id }}-android"; mkdir -p resultados/android; cp "$RUNNER_TEMP"/r/*.json "$RUNNER_TEMP"/r/*.png resultados/android/ 2>/dev/null || true
+          git add resultados; git commit -q -m "resultados $R" || true; git push -q origin "$R" || true
+  ensaio:
+    name: ${{ matrix.nome }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 75
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { nome: linux, os: ubuntu-latest }
+          - { nome: windows, os: windows-latest }
+          - { nome: mac-apple, os: macos-latest }
+          - { nome: mac-intel, os: macos-15-intel }
+    defaults:
+      run:
+        shell: bash
+    env:
+      GITHUB_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Receber o pacote
+        run: |
+          R="chave-${{ github.run_id }}-${{ matrix.nome }}"
+          git config user.name "maquina de ensaio"; git config user.email "noreply@github.com"
+          git checkout -q -b "$R"; mkdir -p chaves; node nuvem-propria/chave.js gerar "chaves/$R.pub"
+          git add chaves; git commit -q -m "chave publica da maquina $R"; git push -q origin "$R"
+          for i in $(seq 1 120); do git fetch -q origin "$R" && git reset -q --hard "origin/$R"; [ -f "chaves/$R.enc" ] && break; sleep 10; done
+          [ -f "chaves/$R.enc" ] || { echo "A chave do pacote não chegou."; exit 1; }
+          node nuvem-propria/chave.js abrir "chaves/$R.enc" nuvem-propria/pacote.bin "$RUNNER_TEMP/pacote.zip"
+          mkdir -p "$RUNNER_TEMP/p" "$RUNNER_TEMP/r"; cd "$RUNNER_TEMP/p"; unzip -q "$RUNNER_TEMP/pacote.zip" || tar -xf "$RUNNER_TEMP/pacote.zip"; rm -f "$RUNNER_TEMP/pacote.zip"
+          (python3 ci/extrair.py produto.zip "$RUNNER_TEMP/x" || python ci/extrair.py produto.zip "$RUNNER_TEMP/x"); ls "$RUNNER_TEMP/x/Nuvem Própria"
+      - name: Navegadores para os ensaios
+        run: |
+          mkdir -p "$RUNNER_TEMP/pw"; cd "$RUNNER_TEMP/pw"; npm init -y >/dev/null; npm install --no-audit --no-fund playwright jszip >/dev/null
+          if [ "${{ matrix.nome }}" = "linux" ]; then npx playwright install --with-deps chromium firefox webkit >/dev/null; else npx playwright install chromium firefox webkit >/dev/null; fi
+          echo "NODE_PATH=$RUNNER_TEMP/pw/node_modules" >> "$GITHUB_ENV"
+      - name: Programa central, sincronização, partilhas e cópia de segurança
+        if: always()
+        run: cd "$RUNNER_TEMP/x/Nuvem Própria/programa" && node ensaios/testes.js 2>&1 | cut -c1-900
+      - name: Painel no Chromium (motor do Chrome e do Edge)
+        if: always()
+        run: cd "$RUNNER_TEMP/x/Nuvem Própria/programa" && CAPTURAS="$RUNNER_TEMP/r" node ensaios/ensaio-painel.js 2>&1 | cut -c1-900
+      - name: Painel no WebKit (motor do Safari)
+        if: always()
+        run: cd "$RUNNER_TEMP/x/Nuvem Própria/programa" && NAVEGADOR=webkit node ensaios/ensaio-painel.js 2>&1 | cut -c1-900
+      - name: Painel no Firefox
+        if: always()
+        run: cd "$RUNNER_TEMP/x/Nuvem Própria/programa" && NAVEGADOR=firefox node ensaios/ensaio-painel.js 2>&1 | cut -c1-900
+      - name: Ficheiros de arranque e computador ligado, como programas verdadeiros
+        if: always()
+        run: cd "$RUNNER_TEMP/x/Nuvem Própria" && ENSAIAR_NODE_PROPRIO=1 RESULTADO="$RUNNER_TEMP/r/arranque.json" node programa/ensaios/ensaio-arranque.js 2>&1 | cut -c1-900
+      - name: Arrancar com o computador (Windows)
+        if: always() && matrix.nome == 'windows'
+        shell: cmd
+        run: |
+          cd /d "%RUNNER_TEMP%\x\Nuvem Própria"
+          set NUVEM_SEM_NAVEGADOR=1
+          set NP_RESP=2
+          call "Arrancar com o computador (Windows).bat"
+          set C=0
+          if exist "%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\Nuvem Propria.lnk" set C=1
+          echo atalho de arranque criado: %C% (esperado 1)
+          echo {"atalho":%C%} > "%RUNNER_TEMP%\r\arranque-com-o-computador.json"
+          if not "%C%"=="1" exit /b 1
+      - name: Arrancar com o computador (Mac)
+        if: always() && startsWith(matrix.nome, 'mac')
+        run: |
+          cd "$RUNNER_TEMP/x/Nuvem Própria"; S=0
+          NP_RESP=2 /bin/bash "./Arrancar com o computador (Mac).command"
+          A=0; for i in $(seq 1 90); do curl -fsS http://127.0.0.1:8794/estado >/dev/null 2>&1 && { A=1; break; }; sleep 2; done; echo "arranca sozinho com a sessão: $A (esperado 1)"; [ "$A" = "1" ] || { S=1; cat programa/dados/arranque.txt 2>/dev/null | tail -20; }
+          NP_RESP=3 /bin/bash "./Arrancar com o computador (Mac).command"; sleep 4
+          B=1; curl -fsS http://127.0.0.1:8794/estado >/dev/null 2>&1 && B=0; echo "deixa de arrancar sozinho: $B (esperado 1)"; [ "$B" = "1" ] || S=1
+          echo "{\"arranca\":$A,\"desfaz\":$B}" > "$RUNNER_TEMP/r/arranque-com-o-computador.json"; exit $S
+      - name: Acesso de fora por ligação cifrada verdadeira
+        if: always() && matrix.nome == 'linux'
+        timeout-minutes: 15
+        run: bash "$RUNNER_TEMP/p/ci/ligacao-cifrada.sh" "$RUNNER_TEMP/x/Nuvem Própria/programa" "$RUNNER_TEMP/r" 2>&1 | cut -c1-900
+      - name: iPhone simulado, com o Safari do iOS
+        if: always() && matrix.nome == 'mac-apple'
+        timeout-minutes: 30
+        run: node "$RUNNER_TEMP/p/ci/ensaio-iphone.js" "$RUNNER_TEMP/x/Nuvem Própria/programa" "$RUNNER_TEMP/r" 2>&1 | cut -c1-900
+      - name: Guardar os resultados
+        if: always()
+        run: |
+          R="chave-${{ github.run_id }}-${{ matrix.nome }}"; mkdir -p "resultados/${{ matrix.nome }}"; cp "$RUNNER_TEMP"/r/*.json "$RUNNER_TEMP"/r/*.png "$RUNNER_TEMP"/r/*.docx "resultados/${{ matrix.nome }}/" 2>/dev/null || true
+          git add resultados; git commit -q -m "resultados $R" || true; git push -q origin "$R" || true
