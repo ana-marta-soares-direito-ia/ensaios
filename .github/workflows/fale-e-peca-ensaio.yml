@@ -20,6 +20,7 @@ jobs:
           python -m pip install -q -U pip huggingface_hub
           if [ "${{ matrix.parte }}" = "voz" ]; then pip install -q faster-whisper jiwer piper-tts; fi
           if [ "${{ matrix.parte }}" = "gemma" ]; then pip install -q -U litert-lm; litert-lm --help | head -30 || true; litert-lm run --help | head -60 || true; fi
+          if [ "${{ matrix.parte }}" = "audio" ]; then pip install -q -U litert-lm jiwer piper-tts numpy "onnx-asr[cpu,hub]"; fi
           if [ "${{ matrix.parte }}" = "outros" ]; then pip install -q llama-cpp-python --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cpu; fi
       - name: Ensaio
         run: SAIDA="$RUNNER_TEMP/saida" python fale-e-peca/ensaio/correr.py ${{ matrix.parte }}

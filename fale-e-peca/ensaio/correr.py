@@ -75,7 +75,38 @@ def voz():
     except Exception as e: res['voz']['erro'] = traceback.format_exc()[-900:]
     guardar()
 
+def audio():
+    # O próprio Gemma 4 ouve áudio: transcreve bem o português europeu? E consegue ir directamente da voz ao prompt?
+    import jiwer
+    from huggingface_hub import hf_hub_download
+    frases = [l.strip() for l in open(os.path.join(AQUI, 'frases.txt'), encoding='utf-8') if l.strip()]; d = os.path.join(SAIDA, 'audio'); os.makedirs(d, exist_ok=True)
+    v = 'pt/pt_PT/tugão/medium/pt_PT-tugão-medium'; onx = hf_hub_download('rhasspy/piper-voices', v + '.onnx'); cfg = hf_hub_download('rhasspy/piper-voices', v + '.onnx.json'); wavs = []
+    for i, f in enumerate(frases + pedidos[:3]):
+        w = os.path.join(d, 'a%d.wav' % i); subprocess.run(['piper', '--model', onx, '--config', cfg, '--output_file', w], input=f, text=True, capture_output=True, timeout=300)
+        if os.path.exists(w):
+            w16 = w.replace('.wav', '-16k.wav'); import wave, numpy as np; x = onda(w)
+            with wave.open(w16, 'wb') as o: o.setnchannels(1); o.setsampwidth(2); o.setframerate(16000); o.writeframes((np.clip(x, -1, 1) * 32767).astype(np.int16).tobytes())
+            wavs.append((w16, f))
+    norm = lambda s: re.sub(r'[^\w\s-]', '', s.lower()).replace('-', ' ')
+    r = res['voz']['Gemma 4 E2B a ouvir'] = {'exemplos': []}; ref, hip = [], []
+    for w, f in wavs[:len(frases)]:
+        t0 = time.time(); o = subprocess.run(['litert-lm', 'run', '--from-huggingface-repo=litert-community/gemma-4-E2B-it-litert-lm', 'gemma-4-E2B-it.litertlm', '--attachment', w, '--prompt=Transcreve exactamente o que é dito neste áudio, em português de Portugal. Escreve apenas a transcrição, sem mais nada.'], capture_output=True, text=True, timeout=900)
+        t = '\n'.join(l for l in o.stdout.strip().splitlines() if not l.startswith(('Downloading', 'Using cached'))).strip(); r['exemplos'].append({'dito': f, 'ouvido': t, 'segundos': round(time.time() - t0, 1), 'erro': o.stderr[-300:] if o.returncode else ''}); ref.append(norm(f)); hip.append(norm(t) or 'x'); guardar()
+    r['erro_palavras_pct'] = round(100 * jiwer.wer(ref, hip), 1)
+    d2 = res['modelos']['Gemma 4 E2B, da voz ao prompt'] = {'motor': 'LiteRT-LM, com o áudio', 'respostas': []}
+    for i, (w, f) in enumerate(wavs[len(frases):]):
+        t0 = time.time(); o = subprocess.run(['litert-lm', 'run', '--from-huggingface-repo=litert-community/gemma-4-E2B-it-litert-lm', 'gemma-4-E2B-it.litertlm', '--attachment', w, '--prompt=' + instr.replace('Transcrição do que a pessoa disse:\n«{PEDIDO}»', 'O que a pessoa disse está no áudio em anexo.')], capture_output=True, text=True, timeout=1500)
+        t = o.stdout.strip(); d2['respostas'].append(dict(avaliar(t), pedido=i, segundos=round(time.time() - t0, 1), texto=t, erro=o.stderr[-300:] if o.returncode else '')); guardar()
+    try:
+        import onnx_asr
+        m = onnx_asr.load_model('nemo-parakeet-tdt-0.6b-v3'); ref, hip, ex = [], [], []; t0 = time.time()
+        for w, f in wavs[:len(frases)]: t = m.recognize(w); t = t if isinstance(t, str) else getattr(t, 'text', str(t)); ref.append(norm(f)); hip.append(norm(t) or 'x'); ex.append({'dito': f, 'ouvido': t})
+        res['voz']['Parakeet 0.6B v3'] = {'erro_palavras_pct': round(100 * jiwer.wer(ref, hip), 1), 'segundos_por_frase': round((time.time() - t0) / len(frases), 1), 'exemplos': ex}
+    except Exception as e: res['voz']['Parakeet 0.6B v3'] = {'erro': traceback.format_exc()[-500:]}
+    guardar()
+
 qual = sys.argv[1] if len(sys.argv) > 1 else 'tudo'
+if qual == 'audio': audio()
 if qual in ('voz', 'tudo'): voz()
 if qual in ('gemma', 'tudo'):
     litert('Gemma 4 E2B (2,6 GB)', 'litert-community/gemma-4-E2B-it-litert-lm', 'gemma-4-E2B-it.litertlm')
