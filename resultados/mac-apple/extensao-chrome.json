@@ -1,0 +1,234 @@
+{
+ "certos": 57,
+ "falhados": 0,
+ "ensaios": [
+  {
+   "ensaio": "a extensão activa-se sozinha quando o programa está a funcionar",
+   "passou": true
+  },
+  {
+   "ensaio": "sítio falso travado antes de abrir: chatgpt-login.com",
+   "passou": true
+  },
+  {
+   "ensaio": "sítio falso travado antes de abrir: claude-ai-download.com",
+   "passou": true
+  },
+  {
+   "ensaio": "sítio falso travado antes de abrir: deepseek-app.com",
+   "passou": true
+  },
+  {
+   "ensaio": "sítio falso travado antes de abrir: chatgtp.com",
+   "passou": true
+  },
+  {
+   "ensaio": "sítio normal abre sem interferência: exemplo-de-jornal.pt",
+   "passou": true
+  },
+  {
+   "ensaio": "sítio normal abre sem interferência: mistral.pt",
+   "passou": true
+  },
+  {
+   "ensaio": "sítio normal abre sem interferência: claudesantos.pt",
+   "passou": true
+  },
+  {
+   "ensaio": "endereço duvidoso abre com aviso (chatgpt.pt)",
+   "passou": true
+  },
+  {
+   "ensaio": "sítio falso travado antes de abrir: mbway-pagamento.com",
+   "passou": true
+  },
+  {
+   "ensaio": "sítio falso travado antes de abrir: portaldasfinancas-reembolso.com",
+   "passou": true
+  },
+  {
+   "ensaio": "sítio falso travado antes de abrir: burla-exemplo.test",
+   "passou": true
+  },
+  {
+   "ensaio": "sítio que usa o nome de uma entidade sem pedir dados: abre com aviso",
+   "passou": true
+  },
+  {
+   "ensaio": "«Abrir mesmo assim» deixa passar esse endereço",
+   "passou": true
+  },
+  {
+   "ensaio": "falsa verificação «Não sou um robô»: o comando não chega à área de transferência",
+   "passou": true
+  },
+  {
+   "ensaio": "falsa verificação com o método antigo de cópia: travada",
+   "passou": true
+  },
+  {
+   "ensaio": "página que troca o texto copiado por um comando: travada",
+   "passou": true
+  },
+  {
+   "ensaio": "comando de instalação que a página mostra: copia-se, com aviso",
+   "passou": true
+  },
+  {
+   "ensaio": "cópia de texto normal: sem interferência",
+   "passou": true
+  },
+  {
+   "ensaio": "PDF sem nada escondido: segue igual",
+   "passou": true
+  },
+  {
+   "ensaio": "PDF com instruções escondidas (letra branca): a IA só recebe a cópia limpa",
+   "passou": true
+  },
+  {
+   "ensaio": "PDF com instruções escondidas (texto invisível): a IA só recebe a cópia limpa",
+   "passou": true
+  },
+  {
+   "ensaio": "PDF com instruções escondidas (letra minúscula): a IA só recebe a cópia limpa",
+   "passou": true
+  },
+  {
+   "ensaio": "PDF com instruções escondidas (texto fora da página): a IA só recebe a cópia limpa",
+   "passou": true
+  },
+  {
+   "ensaio": "«Não anexar»: a IA não recebe o ficheiro",
+   "passou": true
+  },
+  {
+   "ensaio": "«Anexar o original»: segue o ficheiro tal como estava",
+   "passou": true
+  },
+  {
+   "ensaio": "Word com instruções escondidas: a IA só recebe a cópia limpa",
+   "passou": true
+  },
+  {
+   "ensaio": "página HTML largada na conversa: só segue o texto que se vê",
+   "passou": true
+  },
+  {
+   "ensaio": "Excel com uma folha escondida com instruções: a IA só recebe o que se vê",
+   "passou": true
+  },
+  {
+   "ensaio": "PowerPoint com texto da cor do fundo: a IA só recebe o que se vê",
+   "passou": true
+  },
+  {
+   "ensaio": "imagem com texto quase invisível: a IA recebe a imagem limpa",
+   "passou": true
+  },
+  {
+   "ensaio": "imagem sem nada escondido: segue igual",
+   "passou": true
+  },
+  {
+   "ensaio": "ficheiros de outros tipos seguem sem demora",
+   "passou": true
+  },
+  {
+   "ensaio": "sem o programa: PDF com instruções escondidas",
+   "passou": true
+  },
+  {
+   "ensaio": "sem o programa: imagem PNG com texto quase invisível",
+   "passou": true
+  },
+  {
+   "ensaio": "sem o programa: imagem JPEG comprimida com texto quase invisível",
+   "passou": true
+  },
+  {
+   "ensaio": "sem o programa: imagem WebP com texto quase invisível",
+   "passou": true
+  },
+  {
+   "ensaio": "sem o programa: imagem limpa segue igual",
+   "passou": true
+  },
+  {
+   "ensaio": "sem o programa: Word com uma imagem armadilhada lá dentro",
+   "passou": true
+  },
+  {
+   "ensaio": "sem o programa: PDF com uma imagem armadilhada lá dentro",
+   "passou": true
+  },
+  {
+   "ensaio": "sem o programa: Excel com texto da cor do fundo",
+   "passou": true
+  },
+  {
+   "ensaio": "texto colado com letras invisíveis: cola-se só o que se vê",
+   "passou": true
+  },
+  {
+   "ensaio": "o mesmo num campo de texto rico",
+   "passou": true
+  },
+  {
+   "ensaio": "texto normal cola-se sem interferência",
+   "passou": true
+  },
+  {
+   "ensaio": "comando perigoso numa resposta da IA: assinalado; comando normal: não",
+   "passou": true
+  },
+  {
+   "ensaio": "a extensão que lê as conversas e os cookies aparece com risco alto",
+   "passou": true
+  },
+  {
+   "ensaio": "a extensão inofensiva aparece sem acesso às conversas",
+   "passou": true
+  },
+  {
+   "ensaio": "antes: a extensão espia está a correr dentro das páginas",
+   "passou": true
+  },
+  {
+   "ensaio": "«Desligar» desliga mesmo a extensão no navegador",
+   "passou": true
+  },
+  {
+   "ensaio": "depois de desligada, a extensão espia deixa de correr nas páginas",
+   "passou": true
+  },
+  {
+   "ensaio": "a janela da extensão mostra a extensão desligada e o botão para a ligar de novo",
+   "passou": true
+  },
+  {
+   "ensaio": "«Voltar a ligar» repõe a extensão",
+   "passou": true
+  },
+  {
+   "ensaio": "painel: reconhece a extensão instalada neste navegador",
+   "passou": true
+  },
+  {
+   "ensaio": "painel: «Desligar esta extensão» desliga-a no navegador",
+   "passou": true
+  },
+  {
+   "ensaio": "uma página qualquer não consegue dar ordens à extensão",
+   "passou": true
+  },
+  {
+   "ensaio": "as ocorrências ficam registadas",
+   "passou": true
+  },
+  {
+   "ensaio": "o programa recebe da extensão a lista de extensões e as ocorrências",
+   "passou": true
+  }
+ ]
+}
