@@ -37,7 +37,11 @@ jobs:
           python3 ci/extrair.py produto.zip "$RUNNER_TEMP/x"; mv "$RUNNER_TEMP/x/Nuvem Própria" "$RUNNER_TEMP/np"; ls "$RUNNER_TEMP/np"
       - name: Montar a aplicação Android
         run: |
-          cd "$RUNNER_TEMP/p/android" && ./construir-apk.sh "$RUNNER_TEMP/nuvem-propria.apk"
+          if [ -f "$RUNNER_TEMP/np/telemovel/nuvem-propria.apk" ]; then
+            echo "A ensaiar a aplicação que segue no pacote."; cp "$RUNNER_TEMP/np/telemovel/nuvem-propria.apk" "$RUNNER_TEMP/nuvem-propria.apk"
+            "$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)/apksigner" verify --print-certs "$RUNNER_TEMP/nuvem-propria.apk" | head -2
+            cmp "$RUNNER_TEMP/np/telemovel/nuvem-propria.apk" "$RUNNER_TEMP/np/programa/painel/app/nuvem-propria.apk" && echo "A aplicação que o painel oferece é a mesma."
+          else cd "$RUNNER_TEMP/p/android" && ./construir-apk.sh "$RUNNER_TEMP/nuvem-propria.apk"; fi
           cd "$GITHUB_WORKSPACE"; mkdir -p resultados/android; node nuvem-propria/chave.js fechar "$RUNNER_TEMP/nuvem-propria.apk" resultados/android/nuvem-propria.apk.bin
           git add resultados; git commit -q -m "aplicacao montada (cifrada)"; git push -q origin "chave-${{ github.run_id }}-android"
       - name: Permitir a virtualização
