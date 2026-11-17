@@ -1,0 +1,183 @@
+{
+ "passos": [
+  {
+   "n": "a aplicação instala-se no telemóvel",
+   "ok": true
+  },
+  {
+   "n": "o telemóvel tem três fotografias na galeria",
+   "ok": true
+  },
+  {
+   "n": "a aplicação abre e pede o código de ligação",
+   "ok": true
+  },
+  {
+   "n": "antes de ligar, a aplicação mostra a que nuvem é e pede confirmação",
+   "ok": true
+  },
+  {
+   "n": "se a impressão digital não coincidir, a aplicação recusa a ligação",
+   "ok": true
+  },
+  {
+   "n": "código verdadeiro: confirmação",
+   "ok": true
+  },
+  {
+   "n": "liga-se à nuvem e pergunta pelo envio automático das fotografias",
+   "ok": true
+  },
+  {
+   "n": "a nuvem passa a mostrar o telemóvel na lista de aparelhos",
+   "ok": true
+  },
+  {
+   "n": "as três fotografias do telemóvel chegam sozinhas à nuvem (0)",
+   "ok": false
+  },
+  {
+   "n": "arrumadas por ano e mês, com o nome original",
+   "ok": false
+  },
+  {
+   "n": "a fotografia na nuvem é igual à do telemóvel",
+   "ok": false
+  },
+  {
+   "n": "a aplicação mostra os ficheiros da nuvem (ligação cifrada com o certificado da própria nuvem)",
+   "ok": true
+  },
+  {
+   "n": "separador Fotografias dentro da aplicação",
+   "ok": false
+  },
+  {
+   "n": "o cofre funciona dentro da aplicação (a cifra faz-se no próprio telemóvel)",
+   "ok": true
+  },
+  {
+   "n": "separador dos contactos e do calendário dentro da aplicação",
+   "ok": true
+  },
+  {
+   "n": "o painel dentro da aplicação mostra o envio automático deste telemóvel",
+   "ok": true
+  },
+  {
+   "n": "uma fotografia nova segue para a nuvem com a aplicação fechada (só depois de o ensaio pedir ao sistema que corresse o trabalho)",
+   "ok": false
+  },
+  {
+   "n": "uma fotografia repetida não entra duas vezes na nuvem",
+   "ok": false
+  },
+  {
+   "n": "a aplicação volta a abrir",
+   "ok": true
+  },
+  {
+   "n": "o painel dentro da aplicação oferece os contactos e o calendário neste telemóvel",
+   "ok": true
+  },
+  {
+   "n": "os contactos da nuvem aparecem na aplicação de contactos do telemóvel (2)",
+   "ok": true
+  },
+  {
+   "n": "com os telefones, o correio electrónico, a organização e as notas",
+   "ok": true
+  },
+  {
+   "n": "os eventos da nuvem aparecem no calendário do telemóvel",
+   "ok": true
+  },
+  {
+   "n": "com a hora, a repetição semanal e os dias inteiros certos",
+   "ok": true
+  },
+  {
+   "n": "um contacto criado no telemóvel segue para a nuvem",
+   "ok": true
+  },
+  {
+   "n": "um evento criado no telemóvel segue para a nuvem",
+   "ok": true
+  },
+  {
+   "n": "um contacto apagado na nuvem desaparece do telemóvel",
+   "ok": true
+  },
+  {
+   "n": "um contacto apagado no telemóvel é apagado na nuvem",
+   "ok": true
+  },
+  {
+   "n": "botão «Verificar este aparelho» dentro da aplicação",
+   "ok": true
+  },
+  {
+   "n": "a verificação corre no telemóvel: ligação, envio, descarga, cifra, gravação e sincronização",
+   "ok": true
+  },
+  {
+   "n": "a janela da verificação fecha-se",
+   "ok": true
+  },
+  {
+   "n": "cofre de ensaio criado na nuvem com um ficheiro cifrado",
+   "ok": true
+  },
+  {
+   "n": "o cofre aparece fechado dentro da aplicação",
+   "ok": true
+  },
+  {
+   "n": "o cofre abre-se no telemóvel com a palavra-passe (a cifra faz-se no próprio telemóvel)",
+   "ok": true
+  },
+  {
+   "n": "o ficheiro do cofre é decifrado e gravado no telemóvel, igual ao original",
+   "ok": true
+  },
+  {
+   "n": "telemóvel desligado no painel: a aplicação deixa de ter acesso e explica porquê",
+   "ok": true
+  },
+  {
+   "n": "e deixa de enviar fotografias",
+   "ok": false
+  }
+ ],
+ "android": "14",
+ "aparelho": "sdk_gphone64_x86_64",
+ "fotografias": [],
+ "envioSemAbrir": false,
+ "envioForcado": false,
+ "trabalhos": "25",
+ "contas": "2",
+ "eventosNoTelemovel": "Row: 0 title=Audiencia na nuvem, _sync_id=370a88c4-ba09-41f9-a761-c66f64d7b3c3.ics, allDay=0, rrule=FREQ=WEEKLY, duration=P5400S, dtstart=1795198277000, deleted=0\nRow: 1 title=Prazo na nuvem, _sync_id=8e04a964-8e94-4696-965d-4e94271b369f.ics, allDay=1, rrule=NULL, duration=NULL, dtstart=1799971200000, deleted=0\n",
+ "agenda": [
+  "Cliente DoTelemovel"
+ ],
+ "verificacao": [
+  "ENVIO AUTOMÁTICO LIGADO0 fotografias e vídeos enviados por este telemóvel.",
+  "2 MB enviados e conferidos em 0,1 s.",
+  "2 MB recebidos e conferidos em 0,1 s.",
+  "Cifra e decifra correctamente. Abrir o cofre demora cerca de 0,2 s neste aparelho.",
+  "Gravados directamente no telemóvel, parte a parte, pela aplicação.",
+  "Sincronizados em 17/11/2026, 18:12: 1 contactos e 3 eventos."
+ ],
+ "transferencias": "total 688\n-rwxrwx--- 1 u0_a191 media_rw 700000 2026-11-17 18:14 Acordo-do-cofre.pdf\n",
+ "nomeDoTelemovel": "Google sdk_gphone64_x86_64",
+ "certos": 30,
+ "falhados": [
+  "as três fotografias do telemóvel chegam sozinhas à nuvem (0)",
+  "arrumadas por ano e mês, com o nome original",
+  "a fotografia na nuvem é igual à do telemóvel",
+  "separador Fotografias dentro da aplicação",
+  "uma fotografia nova segue para a nuvem com a aplicação fechada (só depois de o ensaio pedir ao sistema que corresse o trabalho)",
+  "uma fotografia repetida não entra duas vezes na nuvem",
+  "e deixa de enviar fotografias"
+ ]
+}
