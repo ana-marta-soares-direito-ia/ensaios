@@ -1,0 +1,10 @@
+{
+ "certos": 0,
+ "falhados": 1,
+ "ensaios": [
+  {
+   "ensaio": "o ensaio correu até ao fim",
+   "passou": false
+  }
+ ]
+}

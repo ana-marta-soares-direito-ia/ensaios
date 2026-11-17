@@ -1,0 +1,26 @@
+{
+ "certos": 3,
+ "falhados": 2,
+ "ensaios": [
+  {
+   "ensaio": "a janela de pergunta abre e fica à espera da resposta",
+   "passou": true
+  },
+  {
+   "ensaio": "fotografia do ecrã com a janela aberta",
+   "passou": true
+  },
+  {
+   "ensaio": "«Manter retirado»: o comando não é reposto",
+   "passou": false
+  },
+  {
+   "ensaio": "sem resposta, a janela fecha sozinha e o comando fica retirado",
+   "passou": false
+  },
+  {
+   "ensaio": "fotografia do ecrã com o aviso",
+   "passou": true
+  }
+ ]
+}

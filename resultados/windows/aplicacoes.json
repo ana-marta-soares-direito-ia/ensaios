@@ -1,0 +1,19 @@
+{
+ "certos": 0,
+ "falhados": 3,
+ "aplicacoes": [],
+ "ensaios": [
+  {
+   "ensaio": "imitação sem assinatura com o nome do ChatGPT: dada como perigo",
+   "passou": false
+  },
+  {
+   "ensaio": "aplicação com o nome do Claude assinada por outra entidade: assinalada",
+   "passou": false
+  },
+  {
+   "ensaio": "foram encontradas aplicações de IA verdadeiras instaladas",
+   "passou": false
+  }
+ ]
+}
