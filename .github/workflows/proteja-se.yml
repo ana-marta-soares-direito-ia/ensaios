@@ -9,7 +9,7 @@ jobs:
   ensaio:
     name: ${{ matrix.nome }}
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 40
+    timeout-minutes: 75
     strategy:
       fail-fast: false
       matrix:
@@ -38,20 +38,61 @@ jobs:
           mkdir -p "$RUNNER_TEMP/p"; cd "$RUNNER_TEMP/p"; unzip -q "$RUNNER_TEMP/pacote.zip" || tar -xf "$RUNNER_TEMP/pacote.zip"; rm -f "$RUNNER_TEMP/pacote.zip"; ls proteja-se
       - name: Navegador para os ensaios
         run: |
-          cd "$RUNNER_TEMP/p/proteja-se"; npm init -y >/dev/null; npm install --no-audit --no-fund playwright >/dev/null
+          mkdir -p "$RUNNER_TEMP/pw"; cd "$RUNNER_TEMP/pw"; npm init -y >/dev/null; npm install --no-audit --no-fund playwright >/dev/null
           if [ "${{ matrix.nome }}" = "linux" ]; then npx playwright install --with-deps chromium >/dev/null; else npx playwright install chromium >/dev/null; fi
+          echo "NODE_PATH=$RUNNER_TEMP/pw/node_modules" >> "$GITHUB_ENV"; mkdir -p "$RUNNER_TEMP/p/proteja-se/r"
+      - name: LibreOffice (para os formatos antigos)
+        continue-on-error: true
+        timeout-minutes: 12
+        run: |
+          if [ "${{ matrix.nome }}" = "linux" ]; then sudo apt-get update -qq >/dev/null; sudo apt-get install -y -qq libreoffice-writer libreoffice-calc libreoffice-impress >/dev/null
+          elif [ "${{ matrix.nome }}" = "windows" ]; then choco install libreoffice-fresh -y --no-progress >/dev/null
+          elif [ "${{ matrix.nome }}" = "mac-apple" ]; then brew install --cask libreoffice >/dev/null 2>&1; fi
+          echo "feito"
       - name: Regras de detecção
         if: always()
         run: cd "$RUNNER_TEMP/p/proteja-se" && node testes.js 2>&1 | grep -v "^Warning\|^Require\|^- " | cut -c1-600
       - name: Ficheiros difíceis
         if: always()
-        run: cd "$RUNNER_TEMP/p/proteja-se" && mkdir -p r && RESULTADO=r/dificeis.json node ensaios/ensaio-dificeis.js 2>&1 | grep -v "^Warning\|^Require\|^- " | cut -c1-900
+        run: cd "$RUNNER_TEMP/p/proteja-se" && RESULTADO=r/dificeis.json node ensaios/ensaio-dificeis.js 2>&1 | grep -v "^Warning\|^Require\|^- " | cut -c1-900
       - name: Programa, guardas e painel
         if: always()
-        run: cd "$RUNNER_TEMP/p/proteja-se" && mkdir -p r && RESULTADO=r/programa.json node ensaios/ensaio-programa.js 2>&1 | grep -v "^Warning\|^Require\|^- " | cut -c1-1500
-      - name: Extensão no navegador
+        run: cd "$RUNNER_TEMP/p/proteja-se" && RESULTADO=r/programa.json node ensaios/ensaio-programa.js 2>&1 | grep -v "^Warning\|^Require\|^- " | cut -c1-1500
+      - name: Extensão no navegador de ensaio (Chromium)
         if: always()
-        run: cd "$RUNNER_TEMP/p/proteja-se" && mkdir -p r && RESULTADO=r/extensao.json node ensaios/ensaio-extensao.js 2>&1 | grep -v "^Warning\|^Require\|^- " | cut -c1-900
+        run: cd "$RUNNER_TEMP/p/proteja-se" && RESULTADO=r/extensao.json node ensaios/ensaio-extensao.js 2>&1 | grep -v "^Warning\|^Require\|^- " | cut -c1-900
+      - name: Extensão no Chrome
+        if: always() && matrix.nome != 'mac-intel'
+        continue-on-error: true
+        run: cd "$RUNNER_TEMP/p/proteja-se" && NAVEGADOR=chrome RESULTADO=r/extensao-chrome.json node ensaios/ensaio-extensao.js 2>&1 | grep -v "^Warning\|^Require\|^- " | cut -c1-900
+      - name: Extensão no Edge
+        if: always() && (matrix.nome == 'windows' || matrix.nome == 'mac-apple')
+        continue-on-error: true
+        run: |
+          cd "$RUNNER_TEMP/p/proteja-se"
+          if [ "${{ matrix.nome }}" = "mac-apple" ]; then brew install --cask microsoft-edge >/dev/null 2>&1 || true; N="/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge"; [ -x "$N" ] || N=msedge; else N=msedge; fi
+          NAVEGADOR="$N" RESULTADO=r/extensao-edge.json node ensaios/ensaio-extensao.js 2>&1 | grep -v "^Warning\|^Require\|^- " | cut -c1-900
+      - name: Extensão no Brave
+        if: always() && (matrix.nome == 'windows' || matrix.nome == 'mac-apple')
+        continue-on-error: true
+        run: |
+          cd "$RUNNER_TEMP/p/proteja-se"
+          if [ "${{ matrix.nome }}" = "mac-apple" ]; then brew install --cask brave-browser >/dev/null 2>&1 || true; N="/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"; else choco install brave -y --no-progress >/dev/null || true; N="C:/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe"; fi
+          ls -la "$N" || true
+          NAVEGADOR="$N" RESULTADO=r/extensao-brave.json node ensaios/ensaio-extensao.js 2>&1 | grep -v "^Warning\|^Require\|^- " | cut -c1-900
+      - name: Janelas de aviso do sistema
+        if: always() && matrix.nome != 'linux'
+        continue-on-error: true
+        run: cd "$RUNNER_TEMP/p/proteja-se" && PROTEJASE_DESISTE=15 RESULTADO=r/janelas.json node ensaios/ensaio-janelas.js r 2>&1 | cut -c1-900
+      - name: Aplicações de IA verdadeiras
+        if: always() && (matrix.nome == 'windows' || matrix.nome == 'mac-apple')
+        continue-on-error: true
+        timeout-minutes: 20
+        run: |
+          cd "$RUNNER_TEMP/p/proteja-se"
+          if [ "${{ matrix.nome }}" = "mac-apple" ]; then for c in claude chatgpt cursor lm-studio ollama-app; do brew install --cask $c >/dev/null 2>&1 && echo "instalada: $c" || echo "não instalada: $c"; done
+          else for c in Anthropic.Claude Ollama.Ollama Anysphere.Cursor ElementLabs.LMStudio; do timeout 420 winget install --id $c -e --silent --disable-interactivity --accept-package-agreements --accept-source-agreements >/dev/null 2>&1 && echo "instalada: $c" || echo "não instalada: $c"; done; fi
+          RESULTADO=r/aplicacoes.json node ensaios/ensaio-aplicacoes.js 2>&1 | cut -c1-900
       - name: Arranque (Mac e Linux)
         if: always() && matrix.nome != 'windows'
         run: |
@@ -85,5 +126,5 @@ jobs:
       - name: Guardar os resultados
         if: always()
         run: |
-          R="chave-${{ github.run_id }}-${{ matrix.nome }}"; mkdir -p "resultados/${{ matrix.nome }}"; cp "$RUNNER_TEMP"/p/proteja-se/r/*.json "resultados/${{ matrix.nome }}/" 2>/dev/null || true
+          R="chave-${{ github.run_id }}-${{ matrix.nome }}"; mkdir -p "resultados/${{ matrix.nome }}"; cp "$RUNNER_TEMP"/p/proteja-se/r/*.json "$RUNNER_TEMP"/p/proteja-se/r/*.png "resultados/${{ matrix.nome }}/" 2>/dev/null || true
           git add resultados; git commit -q -m "resultados $R" || true; git push -q origin "$R" || true
