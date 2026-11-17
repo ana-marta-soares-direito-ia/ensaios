@@ -23,6 +23,9 @@ jobs:
           if [ "${{ matrix.parte }}" = "outros" ]; then pip install -q llama-cpp-python --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cpu; fi
       - name: Ensaio
         run: SAIDA="$RUNNER_TEMP/saida" python fale-e-peca/ensaio/correr.py ${{ matrix.parte }}
+      - name: Resultado
+        if: always()
+        run: echo '@@INICIO@@'; python -c "import json,os;print(json.dumps(json.load(open(os.environ['RUNNER_TEMP']+'/saida/resultado.json'))))" | base64 -w 0; echo; echo '@@FIM@@'
       - uses: actions/upload-artifact@v4
         if: always()
         with: { name: 'fale-e-peca-${{ matrix.parte }}', path: '${{ runner.temp }}/saida/resultado.json' }
