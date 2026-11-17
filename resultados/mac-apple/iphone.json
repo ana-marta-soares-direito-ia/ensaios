@@ -1,0 +1,62 @@
+{
+ "passos": [
+  {
+   "n": "o perfil para o iPhone é um ficheiro de configuração válido",
+   "ok": true
+  },
+  {
+   "n": "o certificado da nuvem é validado pela sua autoridade",
+   "ok": true
+  },
+  {
+   "n": "a validade do certificado respeita o limite de 398 dias que a Apple impõe (397 dias)",
+   "ok": true
+  },
+  {
+   "n": "sem o certificado instalado, o Safari do iPhone não abre a nuvem (mostra o seu aviso)",
+   "ok": true
+  },
+  {
+   "n": "a autoridade da nuvem instala-se no iPhone",
+   "ok": true
+  },
+  {
+   "n": "com o certificado instalado, o Safari do iPhone abre a partilha e a página funciona",
+   "ok": true
+  },
+  {
+   "n": "o painel da nuvem abre no Safari do iPhone",
+   "ok": true
+  },
+  {
+   "n": "o Safari pede o ícone para o ecrã principal",
+   "ok": true
+  },
+  {
+   "n": "o envio feito como o faz a aplicação Atalhos é aceite e a fotografia fica arrumada (Fotografias/2026/2026-11/Foto 2026-11-17 145318.jpg)",
+   "ok": true
+  },
+  {
+   "n": "repetir o envio no dia seguinte não duplica a fotografia",
+   "ok": true
+  },
+  {
+   "n": "uma fotografia no formato do iPhone (HEIC) é reconhecida pelo conteúdo",
+   "ok": true
+  },
+  {
+   "n": "sem a chave certa, o envio é recusado",
+   "ok": true
+  },
+  {
+   "n": "quem não reconhece o certificado da nuvem não envia",
+   "ok": true
+  }
+ ],
+ "aparelho": "iPhone 17",
+ "sistema": "iOS 26.5",
+ "diasDoCertificado": 397,
+ "navegador": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Mobile/15E148 Safari/604.1",
+ "certos": 13,
+ "falhados": []
+}
