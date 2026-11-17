@@ -1,14 +1,15 @@
 name: Fale e Peça (ensaio dos modelos)
 on:
-  push:
-    paths: ['fale-e-peca/ensaio/**']
   workflow_dispatch:
+    inputs:
+      parte: { description: 'voz, gemma, outros ou tudo', default: 'tudo' }
 jobs:
   ensaio:
     strategy:
       fail-fast: false
       matrix:
         parte: [voz, gemma, outros]
+    if: ${{ inputs.parte == 'tudo' || inputs.parte == matrix.parte }}
     runs-on: ubuntu-latest
     timeout-minutes: 170
     steps:

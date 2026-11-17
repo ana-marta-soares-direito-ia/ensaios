@@ -41,6 +41,12 @@ def gguf(nome, candidatos):
     except Exception as e: r['erro'] = traceback.format_exc()[-900:]
     guardar()
 
+def onda(w):
+    import wave, numpy as np
+    with wave.open(w) as f: taxa = f.getframerate(); canais = f.getnchannels(); x = np.frombuffer(f.readframes(f.getnframes()), dtype=np.int16).astype(np.float32) / 32768.0
+    if canais > 1: x = x.reshape(-1, canais).mean(axis=1)
+    n = int(len(x) * 16000 / taxa); return np.interp(np.linspace(0, len(x) - 1, n), np.arange(len(x)), x).astype(np.float32)
+
 def voz():
     try:
         import jiwer
@@ -62,7 +68,7 @@ def voz():
             try:
                 t0 = time.time(); m = WhisperModel(tam, device='cpu', compute_type='int8'); carga = time.time() - t0; ref, hip, exemplos = [], [], []; t0 = time.time()
                 for w, f in wavs:
-                    seg, _ = m.transcribe(w, language='pt', beam_size=5, initial_prompt='Transcrição em português de Portugal.'); t = ' '.join(s.text.strip() for s in seg); ref.append(norm(f)); hip.append(norm(t)); exemplos.append({'dito': f, 'ouvido': t})
+                    seg, _ = m.transcribe(onda(w), language='pt', beam_size=5, initial_prompt='Transcrição em português de Portugal.'); t = ' '.join(s.text.strip() for s in seg); ref.append(norm(f)); hip.append(norm(t)); exemplos.append({'dito': f, 'ouvido': t})
                 res['voz'][tam] = {'erro_palavras_pct': round(100 * jiwer.wer(ref, hip), 1), 'segundos_por_frase': round((time.time() - t0) / max(1, len(wavs)), 1), 'segundos_carga': round(carga, 1), 'exemplos': exemplos}; del m
             except Exception as e: res['voz'][tam] = {'erro': repr(e)[:300]}
             guardar()
