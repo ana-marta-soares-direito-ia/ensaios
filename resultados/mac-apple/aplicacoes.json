@@ -1,0 +1,66 @@
+{
+ "certos": 6,
+ "falhados": 1,
+ "aplicacoes": [
+  {
+   "nome": "ChatGPT",
+   "estado": "confirmada",
+   "quem": "Developer ID Application: OpenAI OpCo, LLC (2DC432GLL2) (2DC432GLL2)"
+  },
+  {
+   "nome": "Claude",
+   "estado": "confirmada",
+   "quem": "Developer ID Application: Anthropic PBC (Q6L2SF6YDW) (Q6L2SF6YDW)"
+  },
+  {
+   "nome": "Cursor",
+   "estado": "outro",
+   "quem": "Developer ID Application: Hilary Stout (VDXQ22DGB9) (VDXQ22DGB9)"
+  },
+  {
+   "nome": "LM Studio",
+   "estado": "confirmada",
+   "quem": "Developer ID Application: Element Labs Inc (D65G88RHWN) (D65G88RHWN)"
+  },
+  {
+   "nome": "Ollama",
+   "estado": "confirmada",
+   "quem": "Developer ID Application: Infra Technologies, Inc (3MU9H2V9Y9) (3MU9H2V9Y9)"
+  },
+  {
+   "nome": "ChatGPT Desktop Pro",
+   "estado": "perigo",
+   "quem": ""
+  }
+ ],
+ "ensaios": [
+  {
+   "ensaio": "imitação sem assinatura com o nome do ChatGPT: dada como perigo",
+   "passou": true
+  },
+  {
+   "ensaio": "foram encontradas aplicações de IA verdadeiras instaladas",
+   "passou": true
+  },
+  {
+   "ensaio": "aplicação verdadeira «ChatGPT»: assinatura do editor confirmada",
+   "passou": true
+  },
+  {
+   "ensaio": "aplicação verdadeira «Claude»: assinatura do editor confirmada",
+   "passou": true
+  },
+  {
+   "ensaio": "aplicação verdadeira «Cursor»: assinatura do editor confirmada",
+   "passou": false
+  },
+  {
+   "ensaio": "aplicação verdadeira «LM Studio»: assinatura do editor confirmada",
+   "passou": true
+  },
+  {
+   "ensaio": "aplicação verdadeira «Ollama»: assinatura do editor confirmada",
+   "passou": true
+  }
+ ]
+}
