@@ -61,10 +61,12 @@ jobs:
       - name: Extensão no navegador de ensaio (Chromium)
         if: always()
         run: cd "$RUNNER_TEMP/p/proteja-se" && RESULTADO=r/extensao.json node ensaios/ensaio-extensao.js 2>&1 | grep -v "^Warning\|^Require\|^- " | cut -c1-900
-      - name: Extensão no Chrome
+      - name: Extensão no Chrome (versão para ensaios publicada pela Google)
         if: always() && matrix.nome != 'mac-intel'
         continue-on-error: true
-        run: cd "$RUNNER_TEMP/p/proteja-se" && NAVEGADOR=chrome RESULTADO=r/extensao-chrome.json node ensaios/ensaio-extensao.js 2>&1 | grep -v "^Warning\|^Require\|^- " | cut -c1-900
+        run: |
+          cd "$RUNNER_TEMP/pw"; N=$(npx --yes @puppeteer/browsers install chrome@stable --path "$RUNNER_TEMP/cft" | tail -1 | sed 's/^chrome@[^ ]* //'); echo "Chrome: $N"
+          cd "$RUNNER_TEMP/p/proteja-se" && NAVEGADOR="$N" RESULTADO=r/extensao-chrome.json node ensaios/ensaio-extensao.js 2>&1 | grep -v "^Warning\|^Require\|^- " | cut -c1-900
       - name: Extensão no Edge
         if: always() && (matrix.nome == 'windows' || matrix.nome == 'mac-apple')
         continue-on-error: true
@@ -77,7 +79,7 @@ jobs:
         continue-on-error: true
         run: |
           cd "$RUNNER_TEMP/p/proteja-se"
-          if [ "${{ matrix.nome }}" = "mac-apple" ]; then brew install --cask brave-browser >/dev/null 2>&1 || true; N="/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"; else choco install brave -y --no-progress >/dev/null || true; N="C:/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe"; fi
+          if [ "${{ matrix.nome }}" = "mac-apple" ]; then brew install --cask brave-browser >/dev/null 2>&1 || true; N="/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"; else choco install brave -y --no-progress >/dev/null || true; N="C:/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe"; [ -f "$N" ] || N="$LOCALAPPDATA/BraveSoftware/Brave-Browser/Application/brave.exe"; [ -f "$N" ] || N="C:/Program Files (x86)/BraveSoftware/Brave-Browser/Application/brave.exe"; fi
           ls -la "$N" || true
           NAVEGADOR="$N" RESULTADO=r/extensao-brave.json node ensaios/ensaio-extensao.js 2>&1 | grep -v "^Warning\|^Require\|^- " | cut -c1-900
       - name: Janelas de aviso do sistema
