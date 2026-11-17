@@ -1,0 +1,660 @@
+{
+ "certos": 109,
+ "falhados": 0,
+ "ensaios": [
+  {
+   "ficheiro": "ant-p-branco.ppt",
+   "esperado": "alta|sem-conversor",
+   "obtido": "sem conversor neste computador",
+   "passou": true
+  },
+  {
+   "ficheiro": "ant-p-fora.odp",
+   "esperado": "alta|sem-conversor",
+   "obtido": "sem conversor neste computador",
+   "passou": true
+  },
+  {
+   "ficheiro": "ant-p-limpo.ppt",
+   "esperado": "nenhuma|sem-conversor",
+   "obtido": "sem conversor neste computador",
+   "passou": true
+  },
+  {
+   "ficheiro": "ant-w-branco.doc",
+   "esperado": "alta|sem-conversor",
+   "obtido": "sem conversor neste computador",
+   "passou": true
+  },
+  {
+   "ficheiro": "ant-w-branco.rtf",
+   "esperado": "alta|sem-conversor",
+   "obtido": "sem conversor neste computador",
+   "passou": true
+  },
+  {
+   "ficheiro": "ant-w-limpo.doc",
+   "esperado": "nenhuma|sem-conversor",
+   "obtido": "sem conversor neste computador",
+   "passou": true
+  },
+  {
+   "ficheiro": "ant-w-oculto.odt",
+   "esperado": "alta|sem-conversor",
+   "obtido": "sem conversor neste computador",
+   "passou": true
+  },
+  {
+   "ficheiro": "ant-x-branco.ods",
+   "esperado": "alta|sem-conversor",
+   "obtido": "sem conversor neste computador",
+   "passou": true
+  },
+  {
+   "ficheiro": "ant-x-folha-escondida.xls",
+   "esperado": "alta|sem-conversor",
+   "obtido": "sem conversor neste computador",
+   "passou": true
+  },
+  {
+   "ficheiro": "ant-x-limpo.xls",
+   "esperado": "nenhuma|sem-conversor",
+   "obtido": "sem conversor neste computador",
+   "passou": true
+  },
+  {
+   "ficheiro": "cr-botao.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "cr-branco.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "cr-escondido-na-pagina.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "cr-escuro.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "cr-gradiente.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "cr-imagem.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "cr-limpo.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "cr-mesma-cor.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "cr-minusculo.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "cr-quase-branco.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "cr-tabela.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "cr-tapado.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "cr-transparente.pdf",
+   "esperado": "alta|ausente",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "h-alt.html",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "h-branco.html",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "h-comentario.html",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "h-escondido.html",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "h-etiquetas.html",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "h-fora.html",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "h-limpo.html",
+   "esperado": "nenhuma|media",
+   "obtido": "media",
+   "passou": true
+  },
+  {
+   "ficheiro": "i-cinzento-legitimo.png",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "i-fotografia.png",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "i-limpa.jpg",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "i-limpa.png",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "i-ordem-a-vista.png",
+   "esperado": "media",
+   "obtido": "media",
+   "passou": true
+  },
+  {
+   "ficheiro": "i-quase-branco.jpg",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "i-quase-branco.png",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "i-sobre-azul.png",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "i-um-nivel.png",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "im-pdf-com-imagem-armadilhada.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "im-pdf-com-imagem-limpa.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "im-powerpoint-com-imagem-armadilhada.pptx",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "im-powerpoint-com-imagem-limpa.pptx",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "im-word-com-imagem-armadilhada.docx",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "lo-w-branco-a-meio.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "lo-w-branco.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "lo-w-cabecalho-de-tabela-escuro.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "lo-w-letra-pequena.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "lo-w-limpo.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "lo-w-mesma-cor-na-celula.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "lo-w-realce-preto.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "lo-w-rodape-branco.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "lo-w-um-ponto.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "p-branco-sobre-forma.pptx",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "p-branco-sobre-imagem.pptx",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "p-branco.pptx",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "p-diapositivo-escondido-legitimo.pptx",
+   "esperado": "baixa",
+   "obtido": "baixa",
+   "passou": true
+  },
+  {
+   "ficheiro": "p-diapositivo-escondido.pptx",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "p-fora.pptx",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "p-forma-escura.pptx",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "p-fundo-escuro.pptx",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "p-limpo.pptx",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "p-minusculo.pptx",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "p-notas-legitimas.pptx",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "p-notas.pptx",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-branco-sem-ordens.pdf",
+   "esperado": "media",
+   "obtido": "media",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-branco-sobre-imagem.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-branco.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-digitalizacao-ocr.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-digitalizacao-texto-por-baixo.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-faixa-escura.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-fora.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-invisivel.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-letra-pequena.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-limpo.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-marca-de-agua.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-mesma-cor.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-minusculo.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-ordem-a-vista.pdf",
+   "esperado": "media",
+   "obtido": "media",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-propriedades.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-quase-preto.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-realce.pdf",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-tapado-forma.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-tapado-imagem.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-terceira-pagina.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "rl-transparente.pdf",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "w-branco-a-meio.docx",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "w-branco.docx",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "w-cabecalho-de-tabela-escuro.docx",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "w-letra-pequena.docx",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "w-limpo.docx",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "w-mesma-cor-na-celula.docx",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "w-oculto.docx",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "w-ordem-a-vista.docx",
+   "esperado": "media",
+   "obtido": "media",
+   "passou": true
+  },
+  {
+   "ficheiro": "w-propriedades.docx",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "w-realce-preto.docx",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "w-rodape-branco.docx",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "w-tabela-com-estilo.docx",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "w-um-ponto.docx",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "x-branco.xlsx",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "x-cinzento-pequeno.xlsx",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "x-coluna-escondida.xlsx",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "x-comentario.xlsx",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "x-folha-escondida-legitima.xlsx",
+   "esperado": "baixa",
+   "obtido": "baixa",
+   "passou": true
+  },
+  {
+   "ficheiro": "x-folha-escondida.xlsx",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "x-limpo.xlsx",
+   "esperado": "nenhuma",
+   "obtido": "nenhuma",
+   "passou": true
+  },
+  {
+   "ficheiro": "x-linha-escondida.xlsx",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "x-mesma-cor.xlsx",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  },
+  {
+   "ficheiro": "x-um-ponto.xlsx",
+   "esperado": "alta",
+   "obtido": "alta",
+   "passou": true
+  }
+ ]
+}
