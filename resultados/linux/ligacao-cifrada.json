@@ -1,0 +1,62 @@
+{
+ "passos": [
+  {
+   "n": "o programa detecta a ligação cifrada deste computador (100.64.0.1)",
+   "ok": true
+  },
+  {
+   "n": "em modo «só nesta rede», a nuvem não anuncia endereço para fora",
+   "ok": true
+  },
+  {
+   "n": "em modo «só nesta rede», quem chega pela ligação cifrada é recusado (resposta 403)",
+   "ok": true
+  },
+  {
+   "n": "com o acesso de fora activo, a nuvem anuncia o endereço da ligação cifrada",
+   "ok": true
+  },
+  {
+   "n": "o segundo nó chega à nuvem pela ligação cifrada, com o certificado da nuvem validado para esse endereço",
+   "ok": true
+  },
+  {
+   "n": "a nuvem vê o pedido a chegar de um endereço da ligação cifrada (100.64.0.2), e não da Internet",
+   "ok": true
+  },
+  {
+   "n": "sem conhecer a autoridade da nuvem, o segundo nó não confia na ligação",
+   "ok": true
+  },
+  {
+   "n": "entra na nuvem de fora, com sessão que só viaja cifrada",
+   "ok": true
+  },
+  {
+   "n": "um ficheiro enviado de fora chega inteiro ao computador central",
+   "ok": true
+  },
+  {
+   "n": "e descarrega-se de fora, igual ao original",
+   "ok": true
+  },
+  {
+   "n": "o registo mostra a entrada feita de fora, com o endereço da ligação cifrada",
+   "ok": true
+  }
+ ],
+ "tailscale": {
+  "instalado": true,
+  "ligado": true,
+  "nome": "central.example.com",
+  "ips": [
+   "100.64.0.1"
+  ],
+  "https": false,
+  "funil": false,
+  "conta": "127.0.0.1"
+ },
+ "vistoDe": "100.64.0.2",
+ "certos": 11,
+ "falhados": []
+}
