@@ -1,0 +1,92 @@
+{
+ "passos": [
+  {
+   "n": "a aplicação instala-se no telemóvel",
+   "ok": true
+  },
+  {
+   "n": "o telemóvel tem três fotografias na galeria",
+   "ok": true
+  },
+  {
+   "n": "a aplicação abre e pede o código de ligação",
+   "ok": true
+  },
+  {
+   "n": "antes de ligar, a aplicação mostra a que nuvem é e pede confirmação",
+   "ok": true
+  },
+  {
+   "n": "se a impressão digital não coincidir, a aplicação recusa a ligação",
+   "ok": true
+  },
+  {
+   "n": "código verdadeiro: confirmação",
+   "ok": true
+  },
+  {
+   "n": "liga-se à nuvem e pergunta pelo envio automático das fotografias",
+   "ok": true
+  },
+  {
+   "n": "a nuvem passa a mostrar o telemóvel na lista de aparelhos",
+   "ok": true
+  },
+  {
+   "n": "as três fotografias do telemóvel chegam sozinhas à nuvem (3)",
+   "ok": true
+  },
+  {
+   "n": "arrumadas por ano e mês, com o nome original",
+   "ok": true
+  },
+  {
+   "n": "a fotografia na nuvem é igual à do telemóvel",
+   "ok": true
+  },
+  {
+   "n": "a aplicação mostra os ficheiros da nuvem (ligação cifrada com o certificado da própria nuvem)",
+   "ok": false
+  },
+  {
+   "n": "separador Fotografias dentro da aplicação",
+   "ok": false
+  },
+  {
+   "n": "o painel dentro da aplicação mostra o envio automático deste telemóvel",
+   "ok": false
+  },
+  {
+   "n": "uma fotografia nova segue para a nuvem com a aplicação fechada",
+   "ok": true
+  },
+  {
+   "n": "uma fotografia repetida não entra duas vezes na nuvem",
+   "ok": true
+  },
+  {
+   "n": "telemóvel desligado no painel: a aplicação deixa de ter acesso e explica porquê",
+   "ok": true
+  },
+  {
+   "n": "e deixa de enviar fotografias",
+   "ok": true
+  }
+ ],
+ "android": "14",
+ "aparelho": "sdk_gphone64_x86_64",
+ "fotografias": [
+  "Fotografias/2026/2026-11/IMG_0001.jpg",
+  "Fotografias/2026/2026-11/IMG_0002.jpg",
+  "Fotografias/2026/2026-11/IMG_0003.jpg"
+ ],
+ "envioSemAbrir": true,
+ "trabalhos": "25",
+ "nomeDoTelemovel": "Google sdk_gphone64_x86_64",
+ "certos": 15,
+ "falhados": [
+  "a aplicação mostra os ficheiros da nuvem (ligação cifrada com o certificado da própria nuvem)",
+  "separador Fotografias dentro da aplicação",
+  "o painel dentro da aplicação mostra o envio automático deste telemóvel"
+ ]
+}
