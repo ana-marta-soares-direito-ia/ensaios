@@ -1,0 +1,66 @@
+{
+ "certos": 7,
+ "falhados": 0,
+ "aplicacoes": [
+  {
+   "nome": "Claude",
+   "estado": "confirmada",
+   "quem": "CN=\"Anthropic, PBC\", O=\"Anthropic, PBC\", L=San Francisco, S=California, C=US, SERIALNUMBER=4860621, OID.2.5.4.15=Private Organization, OID.1.3.6.1.4.1.311.60.2.1.2=Delaware, OID.1.3.6.1.4.1.311.60.2.1.3=US"
+  },
+  {
+   "nome": "LM Studio 0.4.28+2",
+   "estado": "confirmada",
+   "quem": "CN=Element Labs Inc., O=Element Labs Inc., L=Brooklyn, S=New York, C=US, SERIALNUMBER=6659187, OID.2.5.4.15=Private Organization, OID.1.3.6.1.4.1.311.60.2.1.2=Delaware, OID.1.3.6.1.4.1.311.60.2.1.3=US"
+  },
+  {
+   "nome": "ChatGPT Desktop Pro",
+   "estado": "perigo",
+   "quem": "Software Gratis"
+  },
+  {
+   "nome": "Claude AI Assistant",
+   "estado": "outro",
+   "quem": "CN=OpenJS Foundation, O=OpenJS Foundation, L=San Francisco, S=California, C=US"
+  },
+  {
+   "nome": "Ollama version 0.40.16",
+   "estado": "confirmada",
+   "quem": "CN=Ollama Inc., O=Ollama Inc., L=Toronto, S=Ontario, C=CA, SERIALNUMBER=2713355, OID.2.5.4.15=Private Organization, OID.1.3.6.1.4.1.311.60.2.1.2=Ontario, OID.1.3.6.1.4.1.311.60.2.1.3=CA"
+  },
+  {
+   "nome": "Cursor (User)",
+   "estado": "confirmada",
+   "quem": "CN=\"Anysphere, Inc.\", O=\"Anysphere, Inc.\", L=San Francisco, S=California, C=US"
+  }
+ ],
+ "ensaios": [
+  {
+   "ensaio": "imitação sem assinatura com o nome do ChatGPT: dada como perigo",
+   "passou": true
+  },
+  {
+   "ensaio": "aplicação com o nome do Claude assinada por outra entidade: assinalada",
+   "passou": true
+  },
+  {
+   "ensaio": "foram encontradas aplicações de IA verdadeiras instaladas",
+   "passou": true
+  },
+  {
+   "ensaio": "aplicação verdadeira «Claude»: assinatura do editor confirmada",
+   "passou": true
+  },
+  {
+   "ensaio": "aplicação verdadeira «LM Studio 0.4.28+2»: assinatura do editor confirmada",
+   "passou": true
+  },
+  {
+   "ensaio": "aplicação verdadeira «Ollama version 0.40.16»: assinatura do editor confirmada",
+   "passou": true
+  },
+  {
+   "ensaio": "aplicação verdadeira «Cursor (User)»: assinatura do editor confirmada",
+   "passou": true
+  }
+ ]
+}
