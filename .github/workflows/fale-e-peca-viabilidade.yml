@@ -3,21 +3,17 @@ on:
   workflow_dispatch:
 jobs:
   navegador:
-    runs-on: ubuntu-latest
-    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-15, macos-13, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: { node-version: 22 }
-      - run: cd fale-e-peca/viabilidade && npm init -y >/dev/null && npm i --no-audit --no-fund playwright >/dev/null && npx playwright install --with-deps chromium >/dev/null
-      - run: cd fale-e-peca/viabilidade && node navegador.js
-  android:
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    steps:
-      - name: Biblioteca para Android
-        run: |
-          B=https://dl.google.com/dl/android/maven2/com/google/ai/edge/litertlm/litertlm-android
-          curl -sL $B/maven-metadata.xml | tee m.xml; V=$(grep -o '<release>[^<]*' m.xml | sed 's/<release>//'); [ -z "$V" ] && V=$(grep -o '<version>[^<]*' m.xml | tail -1 | sed 's/<version>//'); echo "versão: $V"
-          curl -sL -o l.aar $B/$V/litertlm-android-$V.aar; ls -la l.aar; unzip -l l.aar | head -60; curl -sL $B/$V/litertlm-android-$V.pom | head -80
-          unzip -o -q l.aar classes.jar AndroidManifest.xml || true; cat AndroidManifest.xml || true; unzip -l classes.jar | grep -i "Engine\|Conversation\|Backend" | head -40
+      - shell: bash
+        run: cd fale-e-peca/viabilidade && npm init -y >/dev/null && npm i --no-audit --no-fund playwright >/dev/null && npx playwright install chromium >/dev/null
+      - shell: bash
+        run: cd fale-e-peca/viabilidade && node navegador.js
