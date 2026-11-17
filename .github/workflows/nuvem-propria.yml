@@ -98,7 +98,7 @@ jobs:
           (python3 ci/extrair.py produto.zip "$RUNNER_TEMP/x" || python ci/extrair.py produto.zip "$RUNNER_TEMP/x"); ls "$RUNNER_TEMP/x/Nuvem Própria"
       - name: Navegadores para os ensaios
         run: |
-          mkdir -p "$RUNNER_TEMP/pw"; cd "$RUNNER_TEMP/pw"; npm init -y >/dev/null; npm install --no-audit --no-fund playwright jszip >/dev/null
+          mkdir -p "$RUNNER_TEMP/pw"; cd "$RUNNER_TEMP/pw"; npm init -y >/dev/null; npm install --no-audit --no-fund playwright jszip tsdav >/dev/null
           if [ "${{ matrix.nome }}" = "linux" ]; then npx playwright install --with-deps chromium firefox webkit >/dev/null; else npx playwright install chromium firefox webkit >/dev/null; fi
           echo "NODE_PATH=$RUNNER_TEMP/pw/node_modules" >> "$GITHUB_ENV"
       - name: Programa central, sincronização, partilhas e cópia de segurança
@@ -113,7 +113,19 @@ jobs:
       - name: Painel no Firefox
         if: always()
         run: cd "$RUNNER_TEMP/x/Nuvem Própria/programa" && NAVEGADOR=firefox node ensaios/ensaio-painel.js 2>&1 | cut -c1-900
-      - name: Ficheiros de arranque e computador ligado, como programas verdadeiros
+      - name: Cofre, alertas, protecção e computador de reserva no Chromium
+        if: always()
+        run: cd "$RUNNER_TEMP/x/Nuvem Própria/programa" && CAPTURAS="$RUNNER_TEMP/r" node ensaios/ensaio-proteccao.js 2>&1 | cut -c1-900
+      - name: Cofre, alertas, protecção e computador de reserva no WebKit
+        if: always()
+        run: cd "$RUNNER_TEMP/x/Nuvem Própria/programa" && NAVEGADOR=webkit node ensaios/ensaio-proteccao.js 2>&1 | cut -c1-900
+      - name: Cofre, alertas, protecção e computador de reserva no Firefox
+        if: always()
+        run: cd "$RUNNER_TEMP/x/Nuvem Própria/programa" && NAVEGADOR=firefox node ensaios/ensaio-proteccao.js 2>&1 | cut -c1-900
+      - name: Contactos e calendário, com um programa cliente verdadeiro (CardDAV e CalDAV)
+        if: always()
+        run: cd "$RUNNER_TEMP/x/Nuvem Própria/programa" && node ensaios/ensaio-agenda.js 2>&1 | cut -c1-900
+      - name: Ficheiros de arranque computador ligado e computador de reserva, como programas verdadeiros
         if: always()
         run: cd "$RUNNER_TEMP/x/Nuvem Própria" && ENSAIAR_NODE_PROPRIO=1 RESULTADO="$RUNNER_TEMP/r/arranque.json" node programa/ensaios/ensaio-arranque.js 2>&1 | cut -c1-900
       - name: Arrancar com o computador (Windows)
