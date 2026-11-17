@@ -1,0 +1,12 @@
+<!doctype html><meta charset="utf-8"><title>viabilidade</title><pre id="o">a carregar</pre>
+<script type="module">
+const o = document.getElementById('o'), R = window.R = { passos: [] }, nota = (t) => { R.passos.push(t); o.textContent = R.passos.join('\n'); };
+try {
+  R.gpu = !!navigator.gpu; const ad = navigator.gpu ? await navigator.gpu.requestAdapter() : null; R.adaptador = ad ? { fallback: ad.isFallbackAdapter, info: ad.info ? { vendor: ad.info.vendor, architecture: ad.info.architecture, description: ad.info.description } : null, maxBuffer: ad.limits.maxBufferSize } : null; nota('adaptador: ' + JSON.stringify(R.adaptador));
+  const m = await import('https://cdn.jsdelivr.net/npm/@litert-lm/core/+esm'); R.exporta = Object.keys(m); nota('biblioteca carregada: ' + R.exporta.join(', '));
+  const t0 = performance.now(); const engine = await m.Engine.create({ model: 'hf://litert-community/gemma-4-E2B-it-litert-lm' }); R.cargaS = Math.round((performance.now() - t0) / 1000); nota('modelo carregado em ' + R.cargaS + ' s');
+  const chat = await engine.createConversation(); const t1 = performance.now(); let txt = '';
+  for await (const c of chat.sendMessageStreaming(window.PEDIDO || 'Escreve, em português de Portugal, uma frase sobre o mar.')) { for (const it of c.content || []) if (it.type === 'text' || it.text) txt += it.text || ''; if (txt.length > 1500) break; }
+  R.geraS = Math.round((performance.now() - t1) / 100) / 10; R.texto = txt; nota('resposta em ' + R.geraS + ' s: ' + txt.slice(0, 300)); R.fim = 'certo';
+} catch (e) { R.erro = String(e && e.stack || e).slice(0, 1500); nota('ERRO: ' + R.erro); R.fim = 'erro'; }
+</script>
