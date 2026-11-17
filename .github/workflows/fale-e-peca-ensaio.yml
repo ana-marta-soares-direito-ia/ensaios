@@ -8,8 +8,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        parte: [voz, gemma, outros]
-    if: ${{ inputs.parte == 'tudo' || inputs.parte == matrix.parte }}
+        parte: ${{ fromJSON(inputs.parte == 'tudo' && '["voz","gemma","outros"]' || format('["{0}"]', inputs.parte)) }}
     runs-on: ubuntu-latest
     timeout-minutes: 170
     steps:
