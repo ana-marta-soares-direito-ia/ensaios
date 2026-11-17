@@ -80,3 +80,4 @@ if qual in ('outros', 'tudo'):
     gguf('Gemma 3 4B', ['bartowski/google_gemma-3-4b-it-GGUF', 'unsloth/gemma-3-4b-it-GGUF', 'lmstudio-community/gemma-3-4b-it-GGUF'])
     gguf('Gemma 3 1B', ['bartowski/google_gemma-3-1b-it-GGUF', 'unsloth/gemma-3-1b-it-GGUF'])
 guardar(); print(json.dumps({k: (len(v.get('respostas', [])), v.get('erro', '')[:200]) for k, v in res['modelos'].items()}, ensure_ascii=False)); print(json.dumps({k: (v.get('erro_palavras_pct') if isinstance(v, dict) else v) for k, v in res['voz'].items()}, ensure_ascii=False))
+# ensaio lançado em 2026-11-17 21:16
