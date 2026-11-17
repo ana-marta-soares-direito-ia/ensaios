@@ -73,7 +73,7 @@ jobs:
         include:
           - { nome: linux, os: ubuntu-latest }
           - { nome: windows, os: windows-latest }
-          - { nome: mac-apple, os: macos-latest }
+          - { nome: mac-apple, os: macos-15 }
           - { nome: mac-intel, os: macos-15-intel }
     defaults:
       run:
