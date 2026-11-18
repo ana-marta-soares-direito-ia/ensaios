@@ -1,0 +1,63 @@
+{
+ "maquina": "linux",
+ "sistema": "linux x64",
+ "node": "v22.23.4",
+ "passos": [
+  {
+   "passo": "Arranque pelo ficheiro do comprador, com licença",
+   "passou": true,
+   "nota": "versão 1.4.0"
+  },
+  {
+   "passo": "a.docx codigos: sem dados no ficheiro",
+   "passou": true,
+   "nota": ""
+  },
+  {
+   "passo": "a.docx: reposição dos dados",
+   "passou": true,
+   "nota": ""
+  },
+  {
+   "passo": "a.docx xxxxx: sem dados no ficheiro",
+   "passou": true,
+   "nota": ""
+  },
+  {
+   "passo": "b.xlsx codigos: sem dados no ficheiro",
+   "passou": true,
+   "nota": ""
+  },
+  {
+   "passo": "b.xlsx: reposição dos dados",
+   "passou": true,
+   "nota": ""
+  },
+  {
+   "passo": "b.xlsx xxxxx: sem dados no ficheiro",
+   "passou": true,
+   "nota": ""
+  },
+  {
+   "passo": "c.pptx codigos: sem dados no ficheiro",
+   "passou": true,
+   "nota": ""
+  },
+  {
+   "passo": "c.pptx: reposição dos dados",
+   "passou": true,
+   "nota": ""
+  },
+  {
+   "passo": "c.pptx xxxxx: sem dados no ficheiro",
+   "passou": true,
+   "nota": ""
+  },
+  {
+   "passo": "Ensaio interrompido",
+   "passou": false,
+   "nota": "page.waitForEvent: Timeout 30000ms exceeded while waiting for event \"download\"\n=========================== logs ===========================\nwaiting for event \"download\"\n============================================================"
+  }
+ ],
+ "falhas": 1
+}
