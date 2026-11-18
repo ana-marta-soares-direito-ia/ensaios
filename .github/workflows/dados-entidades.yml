@@ -1,0 +1,35 @@
+name: Contratos públicos por entidade (dados abertos)
+on:
+  schedule:
+    - cron: "23 4 * * 2,5"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "dados-entidades/entidades.py"
+      - ".github/workflows/dados-entidades.yml"
+permissions:
+  contents: write
+concurrency:
+  group: dados-entidades
+  cancel-in-progress: false
+jobs:
+  dados:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install --quiet requests openpyxl
+      - name: Ler os dados abertos e organizá-los por entidade
+        run: python dados-entidades/entidades.py "$RUNNER_TEMP/saida"
+      - name: Publicar no ramo dados-entidades
+        run: |
+          cd "$RUNNER_TEMP/saida"; du -sh a; ls a | wc -l
+          git init -q; git checkout -q -b dados-entidades
+          git config user.name "Dados abertos"; git config user.email "noreply@github.com"
+          echo "Contratos públicos por entidade adjudicante, a partir dos dados abertos oficiais do portal BASE (IMPIC, dados.gov.pt). Ficheiros gerados automaticamente." > LEIAME.txt
+          git add -A; git commit -q -m "Contratos públicos por entidade: actualização dos dados abertos"
+          git push -q -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" dados-entidades
