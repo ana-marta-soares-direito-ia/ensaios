@@ -1,0 +1,82 @@
+name: Painel do Gestor do Contrato
+on:
+  push:
+    branches: [main]
+    paths: ['painel-do-contrato/pacote.bin']
+permissions:
+  contents: write
+jobs:
+  ensaio:
+    name: ${{ matrix.nome }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { nome: linux, os: ubuntu-latest }
+          - { nome: windows, os: windows-latest }
+          - { nome: mac, os: macos-15 }
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Receber o pacote
+        run: |
+          R="chave-${{ github.run_id }}-${{ matrix.nome }}"
+          git config user.name "maquina de ensaio"; git config user.email "noreply@github.com"
+          git checkout -q -b "$R"; mkdir -p chaves; node nuvem-propria/chave.js gerar "chaves/$R.pub"
+          git add chaves; git commit -q -m "chave publica da maquina $R"; git push -q origin "$R"
+          for i in $(seq 1 120); do git fetch -q origin "$R" && git reset -q --hard "origin/$R"; [ -f "chaves/$R.enc" ] && break; sleep 10; done
+          [ -f "chaves/$R.enc" ] || { echo "A chave do pacote não chegou."; exit 1; }
+          node nuvem-propria/chave.js abrir "chaves/$R.enc" painel-do-contrato/pacote.bin "$RUNNER_TEMP/pacote.zip"
+          mkdir -p "$RUNNER_TEMP/p"; cd "$RUNNER_TEMP/p"; unzip -q "$RUNNER_TEMP/pacote.zip"; rm -f "$RUNNER_TEMP/pacote.zip"
+      - name: Ensaio
+        run: |
+          cd "$RUNNER_TEMP/p"
+          if grep -qx "${{ matrix.nome }}" ci/partes.txt; then bash ci/correr.sh ${{ matrix.nome }}; else echo "Esta máquina não entra nesta volta."; fi
+  android:
+    name: android
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Receber o pacote
+        id: pacote
+        run: |
+          R="chave-${{ github.run_id }}-android"
+          git config user.name "maquina de ensaio"; git config user.email "noreply@github.com"
+          git checkout -q -b "$R"; mkdir -p chaves; node nuvem-propria/chave.js gerar "chaves/$R.pub"
+          git add chaves; git commit -q -m "chave publica da maquina $R"; git push -q origin "$R"
+          for i in $(seq 1 120); do git fetch -q origin "$R" && git reset -q --hard "origin/$R"; [ -f "chaves/$R.enc" ] && break; sleep 10; done
+          [ -f "chaves/$R.enc" ] || { echo "A chave do pacote não chegou."; exit 1; }
+          node nuvem-propria/chave.js abrir "chaves/$R.enc" painel-do-contrato/pacote.bin "$RUNNER_TEMP/pacote.zip"
+          mkdir -p "$RUNNER_TEMP/p"; cd "$RUNNER_TEMP/p"; unzip -q "$RUNNER_TEMP/pacote.zip"; rm -f "$RUNNER_TEMP/pacote.zip"
+          if grep -qx android ci/partes.txt; then echo "correr=1" >> "$GITHUB_OUTPUT"; npm i --no-audit --no-fund >/dev/null 2>&1; bash construir.sh; else echo "Esta máquina não entra nesta volta."; fi
+      - name: Permitir a virtualização
+        if: steps.pacote.outputs.correr == '1'
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules >/dev/null
+          sudo udevadm control --reload-rules; sudo udevadm trigger --name-match=kvm
+      - name: Ensaio no telemóvel simulado
+        if: steps.pacote.outputs.correr == '1'
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          target: google_apis
+          arch: x86_64
+          profile: pixel_6
+          cores: 4
+          ram-size: 4096M
+          disk-size: 8G
+          disable-animations: true
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim
+          script: node "$RUNNER_TEMP/p/ci/android.js"
