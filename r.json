@@ -1,0 +1,108 @@
+{
+ "maquina": "linux",
+ "sistema": "linux x64",
+ "node": "v22.23.4",
+ "passos": [
+  {
+   "passo": "Arranque pelo ficheiro do comprador, com licença",
+   "passou": true,
+   "nota": "versão 1.4.0"
+  },
+  {
+   "passo": "a.docx codigos: sem dados no ficheiro",
+   "passou": true,
+   "nota": ""
+  },
+  {
+   "passo": "a.docx: reposição dos dados",
+   "passou": true,
+   "nota": ""
+  },
+  {
+   "passo": "a.docx xxxxx: sem dados no ficheiro",
+   "passou": true,
+   "nota": ""
+  },
+  {
+   "passo": "b.xlsx codigos: sem dados no ficheiro",
+   "passou": true,
+   "nota": ""
+  },
+  {
+   "passo": "b.xlsx: reposição dos dados",
+   "passou": true,
+   "nota": ""
+  },
+  {
+   "passo": "b.xlsx xxxxx: sem dados no ficheiro",
+   "passou": true,
+   "nota": ""
+  },
+  {
+   "passo": "c.pptx codigos: sem dados no ficheiro",
+   "passou": true,
+   "nota": ""
+  },
+  {
+   "passo": "c.pptx: reposição dos dados",
+   "passou": true,
+   "nota": ""
+  },
+  {
+   "passo": "c.pptx xxxxx: sem dados no ficheiro",
+   "passou": true,
+   "nota": ""
+  },
+  {
+   "passo": "e.csv codigos: sem dados no ficheiro",
+   "passou": true,
+   "nota": ""
+  },
+  {
+   "passo": "e.csv xxxxx: sem dados no ficheiro",
+   "passou": true,
+   "nota": ""
+  },
+  {
+   "passo": "d.pdf codigos: sem dados no ficheiro nem na imagem",
+   "passou": true,
+   "nota": " 5 s"
+  },
+  {
+   "passo": "d.pdf xxxxx: sem dados no ficheiro nem na imagem",
+   "passou": true,
+   "nota": " 3 s"
+  },
+  {
+   "passo": "scan.pdf codigos: sem dados no ficheiro nem na imagem",
+   "passou": true,
+   "nota": " 3 s"
+  },
+  {
+   "passo": "scan.pdf xxxxx: sem dados no ficheiro nem na imagem",
+   "passou": true,
+   "nota": " 3 s"
+  },
+  {
+   "passo": "f.png codigos: sem dados no ficheiro nem na imagem",
+   "passou": true,
+   "nota": " 3 s"
+  },
+  {
+   "passo": "f.png xxxxx: sem dados no ficheiro nem na imagem",
+   "passou": true,
+   "nota": " 3 s"
+  },
+  {
+   "passo": "macro.docm: recusado",
+   "passou": true,
+   "nota": ""
+  },
+  {
+   "passo": "pivot.xlsx: recusado",
+   "passou": true,
+   "nota": ""
+  }
+ ],
+ "falhas": 0
+}
