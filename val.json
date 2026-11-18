@@ -1,0 +1,44 @@
+[
+  {
+    "ficheiro": "codigos-a.docx",
+    "erros": 0,
+    "originais": 0,
+    "novos": 0,
+    "exemplos": []
+  },
+  {
+    "ficheiro": "xxxxx-a.docx",
+    "erros": 0,
+    "originais": 0,
+    "novos": 0,
+    "exemplos": []
+  },
+  {
+    "ficheiro": "codigos-b.xlsx",
+    "erros": 1,
+    "originais": 1,
+    "novos": 0,
+    "exemplos": []
+  },
+  {
+    "ficheiro": "xxxxx-b.xlsx",
+    "erros": 1,
+    "originais": 1,
+    "novos": 0,
+    "exemplos": []
+  },
+  {
+    "ficheiro": "codigos-c.pptx",
+    "erros": 0,
+    "originais": 0,
+    "novos": 0,
+    "exemplos": []
+  },
+  {
+    "ficheiro": "xxxxx-c.pptx",
+    "erros": 0,
+    "originais": 0,
+    "novos": 0,
+    "exemplos": []
+  }
+]
