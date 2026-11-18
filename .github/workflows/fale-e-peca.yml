@@ -97,3 +97,8 @@ jobs:
           disable-animations: true
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim
           script: node "$RUNNER_TEMP/p/ci/ensaio-android.js" "$RUNNER_TEMP/fale-e-peca-ensaio.apk" "$RUNNER_TEMP/audio/falado.wav"
+      - name: Deixar a aplicação cifrada para recolha
+        if: steps.pacote.outputs.correr == '1'
+        run: |
+          R="saida-${{ github.run_id }}"; git checkout -q --orphan "$R"; git rm -rfq . >/dev/null 2>&1 || true; rm -rf ./* ; mkdir saida; cp "$RUNNER_TEMP"/saida/* saida/
+          git add saida; git commit -q -m "aplicacao cifrada"; git push -q origin "$R"; echo "recolha em $R"
