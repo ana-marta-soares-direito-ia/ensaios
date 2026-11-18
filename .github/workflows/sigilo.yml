@@ -46,7 +46,7 @@ jobs:
       - name: Validador oficial da Microsoft para Word, Excel e PowerPoint
         if: always()
         continue-on-error: true
-        run: cd "$RUNNER_TEMP/p/ci/val" && dotnet run -c Release -- "$(cd "$RUNNER_TEMP/p" && pwd -W 2>/dev/null || cd "$RUNNER_TEMP/p" && pwd)" 2>&1 | tail -40 | cut -c1-260
+        run: cd "$RUNNER_TEMP/p/ci/val" && dotnet run -c Release -- "$RUNNER_TEMP/p" 2>&1 | tail -40 | cut -c1-260
       - name: Devolver o resultado
         if: always()
         run: |
