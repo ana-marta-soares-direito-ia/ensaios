@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
-          N=$(head -1 sonda/pedido.txt | cut -d'|' -f1); RE=$(head -1 sonda/pedido.txt | cut -d'|' -f2); tail -n +2 sonda/pedido.txt | grep -v '^#' | while read -r u; do [ -z "$u" ] && continue; echo "##### $u"; curl -sS -L -m 40 -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36" -H "Accept-Language: pt-PT,pt;q=0.9" -o /tmp/p -w "estado %{http_code} tipo %{content_type} bytes %{size_download} final %{url_effective}\n" "$u" || echo falhou; python3 -c "
+          N=$(head -1 sonda/pedido.txt | cut -d'|' -f1); RE=$(head -1 sonda/pedido.txt | cut -d'|' -f2); tail -n +2 sonda/pedido.txt | grep -v '^#' | while read -r u; do [ -z "$u" ] && continue; echo "##### $u"; curl -sS -L -m 40 --retry 4 --retry-all-errors --retry-delay 3 -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36" -H "Accept-Language: pt-PT,pt;q=0.9" -o /tmp/p -w "estado %{http_code} tipo %{content_type} bytes %{size_download} final %{url_effective}\n" "$u" || { echo falhou; continue; }; python3 -c "
           import re,sys
           t=open('/tmp/p','rb').read().decode('utf-8','replace'); t=re.sub(r'<style.*?</style>|<script.*?</script>','',t,flags=re.S); t=re.sub(r'\s+',' ',t)
           m=re.search(sys.argv[2],t) if sys.argv[2] else None
