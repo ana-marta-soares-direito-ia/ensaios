@@ -464,5 +464,40 @@ def main():
               open(os.path.join(SAI, 'estado.json'), 'w', encoding='utf8'), ensure_ascii=False)
     print('feito', len(porid), dict(tot), len(mortas))
 
+def vigia():
+    # Para os diplomas da lista (dados-lei/vigia.txt), publica uma impressão digital de cada artigo: quem usa as regras desses artigos fica a saber quando o texto muda.
+    import hashlib, glob
+    lista = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'vigia.txt')
+    if not os.path.exists(lista): return
+    os.makedirs(os.path.join(SAI, 'v'), exist_ok=True)
+    re_art = re.compile(r'^#{6}\s+Artigo\s+(?:(\d+)\.?[ºª°]?(?:\s*-\s*([A-Z]{1,2}))?|(único))(?![\wÀ-ÿ])', re.I)
+    for ident in [l.split('#')[0].strip() for l in open(lista, encoding='utf8')]:
+        if not ident: continue
+        fs = glob.glob(os.path.join(ORIG, 'pt*', '*', ident + '.md'))
+        if not fs: continue
+        txt = open(fs[0], encoding='utf8').read(); arts = {}; cur = None
+        m = re.search(r'^last_updated: "([^"]+)"', txt, re.M)
+        for l in txt.split('\n'):
+            if l.startswith('#'):
+                a = re_art.match(l)
+                if a:
+                    n = 'U' if a.group(3) else a.group(1) + ('-' + a.group(2) if a.group(2) else '')
+                    cur = []; arts.setdefault(n, []).append(cur)
+                else: cur = None
+                continue
+            if cur is not None: cur.append(l)
+        h = {}
+        for n, blocos in arts.items():
+            t = '\n§\n'.join(re.sub(r'[ \t\r\n\u00a0]+', ' ', '\n'.join(b)).strip() for b in blocos)
+            h[n] = hashlib.sha1(t.encode('utf8')).hexdigest()[:12]
+        # última intervenção registada no Diário da República (serve para os diplomas sem texto consolidado)
+        ui = ''
+        try:
+            for r in json.load(open(os.path.join(SAI, 'i', ident.split('-')[1] + '.json'), encoding='utf8')):
+                if r[6] == ident: ui = r[9] or ''; break
+        except Exception: pass
+        json.dump({'u': m.group(1) if m else '', 'ui': ui, 'a': h}, open(os.path.join(SAI, 'v', ident + '.json'), 'w', encoding='utf8'), ensure_ascii=False, separators=(',', ':'))
+
 if __name__ == '__main__':
     main()
+    vigia()

@@ -7,6 +7,7 @@ on:
     branches: [main]
     paths:
       - "dados-lei/lei.py"
+      - "dados-lei/vigia.txt"
       - ".github/workflows/dados-lei.yml"
 permissions:
   contents: write
