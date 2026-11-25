@@ -1,0 +1,13 @@
+name: sonda
+on:
+  workflow_dispatch:
+    inputs:
+      u: { description: "endereços separados por espaço", required: true }
+      n: { description: "bytes a mostrar", default: "3000" }
+jobs:
+  sonda:
+    runs-on: ubuntu-latest
+    steps:
+      - env: { U: "${{ inputs.u }}", N: "${{ inputs.n }}" }
+        run: |
+          for u in $U; do echo "##### $u"; curl -sS -L -m 40 -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36" -H "Accept-Language: pt-PT,pt;q=0.9" -o /tmp/p -w "estado %{http_code} tipo %{content_type} bytes %{size_download}\n" "$u" || echo falhou; iconv -f windows-1252 -t utf-8 /tmp/p 2>/dev/null | tr -s ' \n\t' ' ' | head -c "$N" || head -c "$N" /tmp/p; echo; done
