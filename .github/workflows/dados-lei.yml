@@ -1,0 +1,48 @@
+name: Índice de legislação (Diário da República, 1.ª série)
+on:
+  schedule:
+    - cron: "41 5 * * 2,5"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "dados-lei/lei.py"
+      - ".github/workflows/dados-lei.yml"
+permissions:
+  contents: write
+concurrency:
+  group: dados-lei
+  cancel-in-progress: false
+jobs:
+  dados:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Ir buscar a legislação em texto (repositório aberto legalize-pt)
+        run: git clone -q --depth 1 https://github.com/legalize-dev/legalize-pt.git "$RUNNER_TEMP/legalize"
+      - name: Preparar o índice, a estrutura dos diplomas e as remissões
+        run: python -W ignore dados-lei/lei.py "$RUNNER_TEMP/legalize" "$RUNNER_TEMP/saida"
+      - name: Conferir o resultado antes de publicar
+        run: |
+          python - "$RUNNER_TEMP/saida" <<'PY'
+          import json, sys, os
+          s = sys.argv[1]; e = json.load(open(os.path.join(s, 'estado.json')))
+          assert e['diplomas'] > 170000, e['diplomas']
+          assert e['consolidados'] > 4000, e['consolidados']
+          assert len(os.listdir(os.path.join(s, 'i'))) > 70
+          rv = json.load(open(os.path.join(s, 'rv', '2008.json')))['DRE-2008-18-248178']
+          assert '219' in rv and '22' in rv, 'faltam revogações conhecidas'
+          print('conferido', e['diplomas'], e['ultimo'])
+          PY
+      - name: Publicar no ramo dados-lei
+        run: |
+          cd "$RUNNER_TEMP/saida"; du -sh .
+          git init -q; git checkout -q -b dados-lei
+          git config user.name "Dados abertos"; git config user.email "noreply@github.com"
+          echo "Índice da 1.ª série do Diário da República, preparado a partir do repositório aberto legalize-pt (texto do Diário da República Electrónico, INCM). Ficheiros gerados automaticamente." > LEIAME.txt
+          git add -A; git commit -q -m "Índice de legislação: actualização"
+          git push -q -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" dados-lei
