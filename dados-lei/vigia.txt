@@ -1,0 +1,9 @@
+DRE-2012-227-192425 # Decreto-Lei n.º 227/2012 (PERSI)
+DRE-2013-58-260888 # Decreto-Lei n.º 58/2013
+DRE-1966-47344-477358 # Código Civil
+DRE-2009-133-494264 # Decreto-Lei n.º 133/2009
+DRE-2014-82-E-66022085 # Código do IRS
+DRE-1989-215-620928 # Estatuto dos Benefícios Fiscais
+DRE-2002-158-142700 # Decreto-Lei n.º 158/2002 (planos de poupança)
+DRE-2025-125-962603401 # Decreto-Lei n.º 125/2025
+DRE-1995-48-185720 # Código Penal
