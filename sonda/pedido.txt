@@ -1,8 +1,8 @@
-300|ia
+200|<h1
+https://cursos-ana-marta-soares.pages.dev/departamentos/
+https://cursos-ana-marta-soares.pages.dev/departamentos/penal/
+https://cursos-ana-marta-soares.pages.dev/departamento-penal/entrar
+https://cursos-ana-marta-soares.pages.dev/departamento-fiscal/app.js
+https://cursos-ana-marta-soares.pages.dev/departamento-laboral/api/ia
 https://cursos-ana-marta-soares.pages.dev/dep-base/estado
-https://cursos-ana-marta-soares.pages.dev/departamento-penal/
-https://cursos-ana-marta-soares.pages.dev/departamento-penal/app.js
-https://cursos-ana-marta-soares.pages.dev/dep-base/estilos.css
-https://cursos-ana-marta-soares.pages.dev/remissoes/
-https://cursos-ana-marta-soares.pages.dev/novo-rjue/
-# 1795687718
+# 1795688765
