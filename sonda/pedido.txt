@@ -1,5 +1,8 @@
-120|dez agentes
-https://cursos-ana-marta-soares.pages.dev/departamento-societario/app.js
-https://cursos-ana-marta-soares.pages.dev/departamento-penal/api/ia
+970|Crime fiscal|Inspecção tributária|Dissolução e liquidação|Compropriedade|Licença não activada|Acesso a documentos|rmmgPrevisto
+https://cursos-ana-marta-soares.pages.dev/dep-base/valores.json
+https://cursos-ana-marta-soares.pages.dev/departamentos/
 https://cursos-ana-marta-soares.pages.dev/departamentos/fiscal/
-# 1795690115
+https://cursos-ana-marta-soares.pages.dev/departamentos/societario/
+https://cursos-ana-marta-soares.pages.dev/departamento-fiscal/
+https://cursos-ana-marta-soares.pages.dev/departamento-fiscal/app.js
+# 1795692078
