@@ -1,8 +1,5 @@
-970|Crime fiscal|Inspecção tributária|Dissolução e liquidação|Compropriedade|Licença não activada|Acesso a documentos|rmmgPrevisto
-https://cursos-ana-marta-soares.pages.dev/dep-base/valores.json
-https://cursos-ana-marta-soares.pages.dev/departamentos/
-https://cursos-ana-marta-soares.pages.dev/departamentos/fiscal/
-https://cursos-ana-marta-soares.pages.dev/departamentos/societario/
+Licença não activada|Despacho de acusação
+https://cursos-ana-marta-soares.pages.dev/departamento-penal/app.js
 https://cursos-ana-marta-soares.pages.dev/departamento-fiscal/
-https://cursos-ana-marta-soares.pages.dev/departamento-fiscal/app.js
-# 1795692078
+https://cursos-ana-marta-soares.pages.dev/departamentos/fiscal/
+# 1795693435
