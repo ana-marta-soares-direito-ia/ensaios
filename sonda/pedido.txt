@@ -1,5 +1,5 @@
 40
-https://cursos-ana-marta-soares.pages.dev/registo-de-tentativas/conferir/
-https://cursos-ana-marta-soares.pages.dev/registo-de-tentativas/conferir/pagina.js
-https://cursos-ana-marta-soares.pages.dev/registo-de-tentativas/
-# 1795776352
+https://cursos-ana-marta-soares.pages.dev/registo-de-tentativas/conferir/?v=2
+https://cursos-ana-marta-soares.pages.dev/registo-de-tentativas/conferir/pagina.js?v=2
+https://cursos-ana-marta-soares.pages.dev/registo-de-tentativas/?v=2
+# 1795776438
